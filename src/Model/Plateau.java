@@ -69,4 +69,48 @@ public class Plateau {
 		}
 		return voisins;
 	}
+
+	public void initialiserPiecesPourJoueur(Joueur joueur, int ligneBase, int lignePions) {
+		List<Piece> pieces = new ArrayList<>();
+
+		// Colonnes 1 à 8 (0 à 7)
+		pieces.add(PieceFactory.creer(TypePiece.TOUR, getCase(ligneBase, 0), joueur));
+		pieces.add(PieceFactory.creer(TypePiece.CAVALIER, getCase(ligneBase, 1), joueur));
+		pieces.add(PieceFactory.creer(TypePiece.FOU, getCase(ligneBase, 2), joueur));
+		pieces.add(PieceFactory.creer(TypePiece.REINE, getCase(ligneBase, 3), joueur));
+		pieces.add(PieceFactory.creer(TypePiece.ROI, getCase(ligneBase, 4), joueur));
+		pieces.add(PieceFactory.creer(TypePiece.FOU, getCase(ligneBase, 5), joueur));
+		pieces.add(PieceFactory.creer(TypePiece.CAVALIER, getCase(ligneBase, 6), joueur));
+		pieces.add(PieceFactory.creer(TypePiece.TOUR, getCase(ligneBase, 7), joueur));
+
+		// 8 Pions en dessous
+		for (int j = 0; j < 8; j++) {
+			pieces.add(PieceFactory.creer(TypePiece.PION, getCase(lignePions, j), joueur));
+		}
+
+		joueur.setPieces(pieces);
+	}
+
+
+	public void afficherPlateauAvecPieces() {
+		for (int i = 0; i < 12; i++) {
+			System.out.print((char) ('A' + i) + " ");
+			for (int j = 0; j < 12; j++) {
+				Case c = cases[i][j];
+				if (!c.estValide()) {
+					System.out.print("  ");
+				} else if (c.getPiece() != null) {
+					System.out.print(c.getPiece().getSymbole() + " ");
+				} else {
+					System.out.print("• ");
+				}
+			}
+			System.out.println();
+		}
+		System.out.print("  ");
+		for (int j = 0; j < 12; j++) {
+			System.out.print((j + 1) + " ");
+		}
+		System.out.println();
+	}
 }
