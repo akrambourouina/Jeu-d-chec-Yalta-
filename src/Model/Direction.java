@@ -13,6 +13,7 @@ public enum Direction {
 	public final int dLigne;
 	public final int dColonne;
 
+
 	Direction(int dLigne, int dColonne) {
 		this.dLigne = dLigne;
 		this.dColonne = dColonne;
