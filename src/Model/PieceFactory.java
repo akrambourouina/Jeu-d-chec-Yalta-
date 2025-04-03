@@ -9,6 +9,7 @@ public class PieceFactory {
 			case CAVALIER -> new Cavalier(position, joueur);
 			case PION -> new Pion(position, joueur);
 			case REINE -> new Reine(position, joueur);
+
 		};
 	}
 }
