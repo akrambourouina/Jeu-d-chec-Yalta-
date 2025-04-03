@@ -18,6 +18,9 @@ public abstract class Piece {
 		this.position = nouvellePosition;
 		nouvellePosition.setPiece(this);
 	}
+	public String getSymboleAvecJoueur() {
+     return "" + getSymbole() + joueur.getCouleur();
+      }
 
 	public Joueur getJoueur() { return joueur; }
 

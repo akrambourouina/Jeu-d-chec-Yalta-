@@ -13,19 +13,18 @@ public class Plateau {
 
 	private void initialiserCases() {
 		int[][] grilleValide = {
-              // 1 2 3 4 5 6 7 8 910 1112
-				{1,1,1,1,1,1,1,1,0,0,0,0},//a
-				{1,1,1,1,1,1,1,1,0,0,0,0},//b
-				{1,1,1,1,1,1,1,1,0,0,0,0},//c
-				{1,1,1,1,1,1,1,1,0,0,0,0},//d
-				{1,1,1,1,0,0,0,0,1,1,1,1},//e
-				{1,1,1,1,0,0,0,0,1,1,1,1},//f
-				{1,1,1,1,0,0,0,0,1,1,1,1},//g
-				{1,1,1,1,0,0,0,0,1,1,1,1},//h
-				{0,0,0,0,1,1,1,1,1,1,1,1},//i
-				{0,0,0,0,1,1,1,1,1,1,1,1},//j
-				{0,0,0,0,1,1,1,1,1,1,1,1},//k
-				{0,0,0,0,1,1,1,1,1,1,1,1}//l
+				{1,1,1,1,1,1,1,1,0,0,0,0},
+				{1,1,1,1,1,1,1,1,0,0,0,0},
+				{1,1,1,1,1,1,1,1,0,0,0,0},
+				{1,1,1,1,1,1,1,1,0,0,0,0},
+				{1,1,1,1,0,0,0,0,1,1,1,1},
+				{1,1,1,1,0,0,0,0,1,1,1,1},
+				{1,1,1,1,0,0,0,0,1,1,1,1},
+				{1,1,1,1,0,0,0,0,1,1,1,1},
+				{0,0,0,0,1,1,1,1,1,1,1,1},
+				{0,0,0,0,1,1,1,1,1,1,1,1},
+				{0,0,0,0,1,1,1,1,1,1,1,1},
+				{0,0,0,0,1,1,1,1,1,1,1,1}
 		};
 
 		for (int i = 0; i < 12; i++) {
@@ -41,24 +40,8 @@ public class Plateau {
 		return cases[ligne][colonne];
 	}
 
-	public void afficherPlateau() {
-		for (int i = 0; i < 12; i++) {
-			System.out.print((char)('A' + i) + " ");
-			for (int j = 0; j < 12; j++) {
-				System.out.print(cases[i][j].estValide() ? "• " : "  ");
-			}
-			System.out.println();
-		}
-		System.out.print("  ");
-		for (int j = 0; j < 12; j++) {
-			System.out.print((j + 1) + " ");
-		}
-		System.out.println();
-	}
-
 	public List<Case> getVoisins(Case c) {
 		List<Case> voisins = new ArrayList<>();
-
 		for (Direction dir : Direction.values()) {
 			int i = c.getLigne() + dir.dLigne;
 			int j = c.getColonne() + dir.dColonne;
@@ -70,27 +53,62 @@ public class Plateau {
 		return voisins;
 	}
 
-	public void initialiserPiecesPourJoueur(Joueur joueur, int ligneBase, int lignePions) {
+	public void initialiserJoueurBasYalta(Joueur joueur) {
 		List<Piece> pieces = new ArrayList<>();
 
-		// Colonnes 1 à 8 (0 à 7)
-		pieces.add(PieceFactory.creer(TypePiece.TOUR, getCase(ligneBase, 0), joueur));
-		pieces.add(PieceFactory.creer(TypePiece.CAVALIER, getCase(ligneBase, 1), joueur));
-		pieces.add(PieceFactory.creer(TypePiece.FOU, getCase(ligneBase, 2), joueur));
-		pieces.add(PieceFactory.creer(TypePiece.REINE, getCase(ligneBase, 3), joueur));
-		pieces.add(PieceFactory.creer(TypePiece.ROI, getCase(ligneBase, 4), joueur));
-		pieces.add(PieceFactory.creer(TypePiece.FOU, getCase(ligneBase, 5), joueur));
-		pieces.add(PieceFactory.creer(TypePiece.CAVALIER, getCase(ligneBase, 6), joueur));
-		pieces.add(PieceFactory.creer(TypePiece.TOUR, getCase(ligneBase, 7), joueur));
+		// Lignes E à L (4 à 11)
+		// Colonne 11 = pièces principales
+		// Colonne 10 = pions
 
-		// 8 Pions en dessous
-		for (int j = 0; j < 8; j++) {
-			pieces.add(PieceFactory.creer(TypePiece.PION, getCase(lignePions, j), joueur));
+		// Ordre d'en bas vers le haut (L -> E)
+		int[] lignes = {11, 10, 9, 8, 7, 6, 5, 4}; // L, K, J, I, H, G, F, E
+		TypePiece[] ordre = {
+				TypePiece.TOUR,
+				TypePiece.CAVALIER,
+				TypePiece.FOU,
+				TypePiece.REINE,
+				TypePiece.TOUR,
+				TypePiece.CAVALIER,
+				TypePiece.FOU,
+				TypePiece.ROI
+		};
+
+		for (int i = 0; i < 8; i++) {
+			// pièces principales en colonne 11
+			pieces.add(PieceFactory.creer(ordre[i], getCase(lignes[i], 11), joueur));
+			// pions en colonne 10
+			pieces.add(PieceFactory.creer(TypePiece.PION, getCase(lignes[i], 10), joueur));
 		}
 
 		joueur.setPieces(pieces);
 	}
 
+
+	public void initialiserJoueurGaucheYalta(Joueur joueur) {
+		List<Piece> pieces = new ArrayList<>();
+		int[] lignes = {7,6,5,4,3,2,1,0};
+		TypePiece[] ordre = {TypePiece.TOUR, TypePiece.CAVALIER, TypePiece.FOU, TypePiece.REINE, TypePiece.ROI, TypePiece.FOU, TypePiece.CAVALIER, TypePiece.TOUR};
+		for (int i = 0; i < 8; i++) {
+			pieces.add(PieceFactory.creer(ordre[i], getCase(lignes[i], 0), joueur));
+			pieces.add(PieceFactory.creer(TypePiece.PION, getCase(lignes[i], 1), joueur));
+		}
+		joueur.setPieces(pieces);
+	}
+
+	public void initialiserJoueurHautYalta(Joueur joueur) {
+		List<Piece> pieces = new ArrayList<>();
+		//int ligneBase = 0, lignePions = 1;
+		int[] lignes = {11,10,9,8,3,2,1,0};
+		TypePiece[] ordre = {TypePiece.TOUR, TypePiece.CAVALIER, TypePiece.FOU, TypePiece.REINE, TypePiece.ROI, TypePiece.FOU, TypePiece.CAVALIER, TypePiece.TOUR};
+		for (int i = 0; i < 8; i++) {
+			//pieces.add(PieceFactory.creer(ordre[i], getCase(ligneBase, colonnes[i]), joueur));
+			//pieces.add(PieceFactory.creer(TypePiece.PION, getCase(lignePions, colonnes[i]), joueur));
+			pieces.add(PieceFactory.creer(ordre[i], getCase(lignes[i], 7), joueur));
+			// pions en colonne 10
+			pieces.add(PieceFactory.creer(TypePiece.PION, getCase(lignes[i], 6), joueur));
+		}
+		joueur.setPieces(pieces);
+	}
 
 	public void afficherPlateauAvecPieces() {
 		for (int i = 0; i < 12; i++) {
@@ -98,18 +116,18 @@ public class Plateau {
 			for (int j = 0; j < 12; j++) {
 				Case c = cases[i][j];
 				if (!c.estValide()) {
-					System.out.print("  ");
+					System.out.print("   ");
 				} else if (c.getPiece() != null) {
-					System.out.print(c.getPiece().getSymbole() + " ");
+					System.out.print(String.format("%-3s", c.getPiece().getSymboleAvecJoueur()));
 				} else {
-					System.out.print("• ");
+					System.out.print("•  ");
 				}
 			}
 			System.out.println();
 		}
-		System.out.print("  ");
+		System.out.print("   ");
 		for (int j = 0; j < 12; j++) {
-			System.out.print((j + 1) + " ");
+			System.out.print((j + 1) + (j + 1 < 10 ? "  " : " "));
 		}
 		System.out.println();
 	}
