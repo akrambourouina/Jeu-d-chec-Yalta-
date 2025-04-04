@@ -22,4 +22,5 @@ public class Case {
 	public String toString() {
 		return "" + (char)('A' + ligne) + (colonne + 1);
 	}
+
 }

@@ -27,6 +27,15 @@ class Main {
 		plateau.initialiserJoueurHautYalta(joueur2);
 
 		plateau.afficherPlateauAvecPieces();
+
+		Piece pion = plateau.getCase(7, 10).getPiece(); // Un pion rouge
+		List<Case> moves = pion.getDeplacementsPossibles(plateau);
+		System.out.println("Déplacements possibles du pion " + pion.getSymboleAvecJoueur() + " en " + pion.getPosition() + " :");
+		for (Case c : moves) {
+			System.out.println(" - " + c); // toString() appelé ici
+		}
+
+
 	}
 }
 
