@@ -11,55 +11,72 @@ public class Pion extends Piece {
 	@Override
 	public List<Case> getDeplacementsPossibles(Plateau plateau) {
 		List<Case> deplacements = new ArrayList<>();
-
 		int l = position.getLigne();
 		int c = position.getColonne();
 
-		// Orientation selon le joueur
-		int directionL = 0;
-		int directionC = 0;
+		// Détection de la zone centrale (croisement)
+		boolean zoneCentrale = (
+				(l >= 4 && l <= 7 && c >= 4 && c <= 7) || // cœur central
+						(l == 8 && c >= 4 && c <= 7) || // entrée du bas
+						(l == 3 && c >= 4 && c <= 7) || // entrée du haut
+						(c == 4 && l >= 4 && l <= 7) || // entrée gauche
+						(c == 7 && l >= 4 && l <= 7)    // entrée droite
+		);
 
+		// Direction personnalisée selon position et joueur
+		int dirL = 0, dirC = 0;
 		switch (joueur.getCouleur()) {
-			case 0: directionC = -1; break; // Blancs (vers la gauche)
-			case 1: directionC = 1; break;  // Rouges (vers le bas)
-			case 2: directionC = -1; break;  // Noirs (vers la droite)
-		}
-
-		// Avance simple
-		Case avant = plateau.getCase(l + directionL, c + directionC);
-		if (avant != null && avant.estValide() && avant.getPiece() == null) {
-			deplacements.add(avant);
-		}
-
-		// Captures diagonales
-		int[][] diagonales = {
-				{directionL - 1, directionC},
-				{directionL + 1, directionC}
-		};
-
-		for (int[] d : diagonales) {
-			Case diag = plateau.getCase(l + d[0], c + d[1]);
-			if (diag != null && diag.estValide() && diag.getPiece() != null &&
-					diag.getPiece().getJoueur() != joueur) {
-				deplacements.add(diag);
+			case 0 -> { // Blanc
+				if (zoneCentrale) dirC = -1;  // vers le haut
+				else dirC = -1;               // vers la gauche
+			}
+			case 1 -> { // Rouge
+				if (zoneCentrale) dirC = 1;   // vers la droite
+				else dirC = 1;                // vers le bas
+			}
+			case 2 -> { // Noir
+				if (zoneCentrale) dirC = 1;   // vers le bas
+				else dirC = -1;               // vers la gauche
 			}
 		}
 
-		System.out.println("Test pion " + joueur.getCouleur() + " en " + position);
-		System.out.println("Case avant = " + (l + directionL) + "," + (c + directionC));
-		System.out.println("Case trouvée : " + avant);
-		System.out.println("Est valide ? " + (avant != null && avant.estValide()));
-		System.out.println("Occupée ? " + (avant != null && avant.getPiece() != null));
+		// Avance simple
+		Case avant = plateau.getCase(l + dirL, c + dirC);
+		if (avant != null && avant.estValide() && avant.getPiece() == null) {
+			deplacements.add(avant);
 
+			// Avance de 2 cases si sur ligne de départ
+			boolean caseDepart = switch (joueur.getCouleur()) {
+				case 0 -> !zoneCentrale && c == 10; // Blancs à droite
+				case 1 -> !zoneCentrale && l == 0;  // Rouges en haut
+				case 2 -> !zoneCentrale && c == 6;  // Noirs à gauche
+				default -> false;
+			};
+			Case deuxAvance = plateau.getCase(l + 2 * dirL, c + 2 * dirC);
+			if (caseDepart && deuxAvance != null && deuxAvance.estValide() && deuxAvance.getPiece() == null) {
+				deplacements.add(deuxAvance);
+			}
+		}
+
+		// Captures diagonales normales
+		int[][] diagonales = {
+				{dirL - 1, dirC}, {dirL + 1, dirC},
+				{dirL, dirC - 1}, {dirL, dirC + 1}
+		};
+
+		for (int[] d : diagonales) {
+			Case cible = plateau.getCase(l + d[0], c + d[1]);
+			if (cible != null && cible.estValide() && cible.getPiece() != null &&
+					cible.getPiece().getJoueur() != joueur) {
+				deplacements.add(cible);
+			}
+		}
 
 		return deplacements;
 	}
-
 
 	@Override
 	public char getSymbole() {
 		return 'P';
 	}
-
-
 }
