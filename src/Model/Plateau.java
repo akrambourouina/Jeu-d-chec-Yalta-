@@ -66,29 +66,82 @@ public class Plateau {
 
 					// Dans ce système, NORD/SUD affectent les colonnes
 					// et EST/OUEST affectent les lignes
-					switch (dir) {
-						case NORD -> nj = col + 1;
-						case SUD -> nj = col - 1;
-						case EST -> ni = ligne + 1;
-						case OUEST -> ni = ligne - 1;
-						case NORD_EST -> {
-							ni = ligne + 1;
-							nj = col + 1;
-						}
-						case NORD_OUEST -> {
-							ni = ligne - 1;
-							nj = col + 1;
-						}
-						case SUD_EST -> {
-							ni = ligne + 1;
-							nj = col - 1;
-						}
-						case SUD_OUEST -> {
-							ni = ligne - 1;
-							nj = col - 1;
+					if(ligne >= 0 && ligne <= 7 && col >= 0 && col <= 3 ) {
+						switch (dir) {
+							case NORD -> nj = col + 1;
+							case SUD -> nj = col - 1;
+							case EST -> ni = ligne + 1;
+							case OUEST -> ni = ligne - 1;
+							case NORD_EST -> {
+								ni = ligne + 1;
+								nj = col + 1;
+							}
+							case NORD_OUEST -> {
+								ni = ligne - 1;
+								nj = col + 1;
+							}
+							case SUD_EST -> {
+								ni = ligne + 1;
+								nj = col - 1;
+							}
+							case SUD_OUEST -> {
+								ni = ligne - 1;
+								nj = col - 1;
+							}
 						}
 					}
 
+					if(ligne >= 8 && ligne <= 11 && col >= 8 && col <= 11 ) {
+						switch (dir) {
+							case NORD -> nj = col - 1;         // Haut
+							case SUD -> nj = col + 1;         // Bas
+							case EST -> ni = ligne + 1;           // Droite
+							case OUEST -> ni = ligne - 1;         // Gauche
+							case NORD_EST -> {
+								ni = ligne - 1;
+								nj = col + 1;
+							}
+							case NORD_OUEST -> {
+								ni = ligne - 1;
+								nj = col - 1;
+							}
+							case SUD_EST -> {
+								ni = ligne + 1;
+								nj = col + 1;
+							}
+							case SUD_OUEST -> {
+								ni = ligne + 1;
+								nj = col - 1;
+							}
+						}
+
+					}
+
+					if(ligne >= 8 && ligne <= 11 && col >= 8 && col <= 11 ) {
+						switch (dir) {
+							case NORD -> nj = col - 1;         // Haut
+							case SUD -> nj = col + 1;         // Bas
+							case EST -> ni = ligne + 1;           // Droite
+							case OUEST -> ni = ligne - 1;         // Gauche
+							case NORD_EST -> {
+								ni = ligne - 1;
+								nj = col + 1;
+							}
+							case NORD_OUEST -> {
+								ni = ligne - 1;
+								nj = col - 1;
+							}
+							case SUD_EST -> {
+								ni = ligne + 1;
+								nj = col + 1;
+							}
+							case SUD_OUEST -> {
+								ni = ligne + 1;
+								nj = col - 1;
+							}
+						}
+
+					}
 					Case voisine = getCase(ni, nj);
 					if (voisine != null && voisine.estValide()) {
 						c.setVoisin(dir, voisine);
@@ -97,14 +150,14 @@ public class Plateau {
 
 				// Connexions spéciales de la zone centrale :
 				//E4
-				if (ligne >= 4 && ligne <= 7 && col == 3) {
+				if (ligne ==4 && col == 3) {
 					c.setVoisin(Direction.NORD, getCase(4, 8));
 					c.setVoisin(Direction.SUD, getCase(4, 2));
 					c.setVoisin(Direction.EST, getCase(5, 3));
 					c.setVoisin(Direction.OUEST, getCase(3, 3));
 				}
 				// I9
-				if (ligne >= 8 && ligne <= 11 && col == 8) {
+				if (ligne == 8 && col == 8) {
 					c.setVoisin(Direction.NORD, getCase(8, 4));
 					c.setVoisin(Direction.SUD, getCase(8, 9));
 					c.setVoisin(Direction.EST, getCase(9, 8));

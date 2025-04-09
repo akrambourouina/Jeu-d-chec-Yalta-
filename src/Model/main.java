@@ -49,17 +49,17 @@ class Main {
 		System.out.println("\n===== TEST DES DÉPLACEMENTS DES PIONS =====");
 
 		// ⚪ Pion blanc (doit aller vers la gauche)
-		testDeplacementPion(plateau, 8, 8);  // pion blanc en I11
+		//testDeplacementPion(plateau, 8, 8);  // pion blanc en I11
 
 		// 🔴 Pion rouge (doit aller vers le bas)
-		testDeplacementPion(plateau, 6, 1);   // pion rouge en G2
+		//testDeplacementPion(plateau, 6, 1);   // pion rouge en G2
 
 		// ⚫ Pion noir (doit aller vers la droite)
-		testDeplacementPion(plateau, 2, 6);   // pion noir en C7
+		//testDeplacementPion(plateau, 2, 6);   // pion noir en C7
 
 		plateau.initialiserVoisins(); // N'oublie pas ça !
 
-		Case caseTest = plateau.getCase(3, 3); // I9
+		Case caseTest = plateau.getCase(4, 3); // I9
 
 		System.out.println("Case test : " + caseTest);
 
@@ -69,8 +69,19 @@ class Main {
 				System.out.println(" - " + dir + " → " + voisin);
 			}
 		}
-	}
 
+
+		/////////////////////////////getdeplacement
+
+		Piece pion = plateau.getCase(2, 1).getPiece(); // pion blanc
+		List<Case> moves = pion.getDeplacementsPossibles(plateau);
+		System.out.println("Déplacements possibles de " + pion.getSymboleAvecJoueur() + " en " + pion.getPosition() + " :");
+		for (Case c : moves) {
+			System.out.println(" - " + c);
+		}
+
+	}
+/*
 	public static void testDeplacementPion(Plateau plateau, int ligne, int colonne) {
 		Case casePion = plateau.getCase(ligne, colonne);
 		Piece piece = casePion.getPiece();
@@ -95,7 +106,7 @@ class Main {
 
 
 
-	}
+	}*/
 
 
 }

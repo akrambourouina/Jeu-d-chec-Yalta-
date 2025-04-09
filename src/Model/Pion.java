@@ -11,62 +11,37 @@ public class Pion extends Piece {
 	@Override
 	public List<Case> getDeplacementsPossibles(Plateau plateau) {
 		List<Case> deplacements = new ArrayList<>();
-		int l = position.getLigne();
-		int c = position.getColonne();
 
-		// Détection de la zone centrale (croisement)
-		boolean zoneCentrale = (
-				(l >= 4 && l <= 7 && c >= 4 && c <= 7) || // cœur central
-						(l == 8 && c >= 4 && c <= 7) || // entrée du bas
-						(l == 3 && c >= 4 && c <= 7) || // entrée du haut
-						(c == 4 && l >= 4 && l <= 7) || // entrée gauche
-						(c == 7 && l >= 4 && l <= 7)    // entrée droite
-		);
+		// Le pion avance vers son "NORD" défini dynamiquement
+		Case nord = position.getVoisin(Direction.NORD);
+		if (nord != null && nord.getPiece() == null) {
+			deplacements.add(nord);
 
-		// Direction personnalisée selon position et joueur
-		int dirL = 0, dirC = 0;
-		switch (joueur.getCouleur()) {
-			case 0 -> { // Blanc
-				if (zoneCentrale) dirC = -1;  // vers le haut
-				else dirC = -1;               // vers la gauche
-			}
-			case 1 -> { // Rouge
-				if (zoneCentrale) dirC = 1;   // vers la droite
-				else dirC = 1;                // vers le bas
-			}
-			case 2 -> { // Noir
-				if (zoneCentrale) dirC = 1;   // vers le bas
-				else dirC = -1;               // vers la gauche
-			}
-		}
-
-		// Avance simple
-		Case avant = plateau.getCase(l + dirL, c + dirC);
-		if (avant != null && avant.estValide() && avant.getPiece() == null) {
-			deplacements.add(avant);
-
-			// Avance de 2 cases si sur ligne de départ
-			boolean caseDepart = switch (joueur.getCouleur()) {
-				case 0 -> !zoneCentrale && c == 10; // Blancs à droite
-				case 1 -> !zoneCentrale && l == 0;  // Rouges en haut
-				case 2 -> !zoneCentrale && c == 6;  // Noirs à gauche
+			// Test pour avancer de 2 cases depuis la position de départ
+			boolean estEnCaseDepart = switch (joueur.getCouleur()) {
+				case 0 -> position.getColonne() == 10; // blanc
+				case 1 -> position.getLigne() == 0;    // rouge
+				case 2 -> position.getColonne() == 6;  // noir
 				default -> false;
 			};
-			Case deuxAvance = plateau.getCase(l + 2 * dirL, c + 2 * dirC);
-			if (caseDepart && deuxAvance != null && deuxAvance.estValide() && deuxAvance.getPiece() == null) {
-				deplacements.add(deuxAvance);
+
+			if (estEnCaseDepart) {
+				Case deuxNord = nord.getVoisin(Direction.NORD);
+				if (deuxNord != null && deuxNord.getPiece() == null) {
+					deplacements.add(deuxNord);
+				}
 			}
 		}
 
-		// Captures diagonales normales
-		int[][] diagonales = {
-				{dirL - 1, dirC}, {dirL + 1, dirC},
-				{dirL, dirC - 1}, {dirL, dirC + 1}
+		// Captures possibles sur les côtés du "nord"
+		Direction[] directionsCaptures = switch (joueur.getCouleur()) {
+			case 0, 1, 2 -> new Direction[]{Direction.NORD_OUEST, Direction.NORD_EST};
+			default -> new Direction[0];
 		};
 
-		for (int[] d : diagonales) {
-			Case cible = plateau.getCase(l + d[0], c + d[1]);
-			if (cible != null && cible.estValide() && cible.getPiece() != null &&
+		for (Direction dir : directionsCaptures) {
+			Case cible = position.getVoisin(dir);
+			if (cible != null && cible.getPiece() != null &&
 					cible.getPiece().getJoueur() != joueur) {
 				deplacements.add(cible);
 			}
@@ -74,6 +49,9 @@ public class Pion extends Piece {
 
 		return deplacements;
 	}
+
+
+
 
 	@Override
 	public char getSymbole() {
