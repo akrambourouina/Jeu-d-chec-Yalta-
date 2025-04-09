@@ -68,6 +68,7 @@ class Main {
 			if (voisin != null) {
 				System.out.println(" - " + dir + " → " + voisin);
 			}
+
 		}
 
 
