@@ -312,4 +312,5 @@ public class Plateau {
 		joueur.setPieces(pieces);
 	}
 
+
 }
