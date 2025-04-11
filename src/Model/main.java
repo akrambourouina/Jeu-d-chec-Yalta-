@@ -59,7 +59,7 @@ class Main {
 
 		plateau.initialiserVoisins(); // N'oublie pas ça !
 
-		Case caseTest = plateau.getCase(4, 3); // I9
+		Case caseTest = plateau.getCase(8, 6); // I9
 
 		System.out.println("Case test : " + caseTest);
 

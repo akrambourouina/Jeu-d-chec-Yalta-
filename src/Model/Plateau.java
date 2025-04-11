@@ -117,7 +117,59 @@ public class Plateau {
 
 					}
 
-					if(ligne >= 8 && ligne <= 11 && col >= 8 && col <= 11 ) {
+					if(ligne >= 4 && ligne <= 7 && col >= 8 && col <= 11 ) {
+						switch (dir) {
+							case NORD -> nj = col - 1;         // Haut
+							case SUD -> nj = col + 1;         // Bas
+							case EST -> ni = ligne - 1;           // Droite
+							case OUEST -> ni = ligne + 1;         // Gauche
+							case NORD_EST -> {
+								ni = ligne - 1;
+								nj = col + 1;
+							}
+							case NORD_OUEST -> {
+								ni = ligne - 1;
+								nj = col - 1;
+							}
+							case SUD_EST -> {
+								ni = ligne + 1;
+								nj = col + 1;
+							}
+							case SUD_OUEST -> {
+								ni = ligne + 1;
+								nj = col - 1;
+							}
+						}
+
+					}
+
+					if(ligne >= 0 && ligne <= 3 && col >= 4 && col <= 7 ) {
+						switch (dir) {
+							case NORD -> nj = col - 1;         // Haut
+							case SUD -> nj = col + 1;         // Bas
+							case EST -> ni = ligne - 1;           // Droite
+							case OUEST -> ni = ligne + 1;         // Gauche
+							case NORD_EST -> {
+								ni = ligne - 1;
+								nj = col + 1;
+							}
+							case NORD_OUEST -> {
+								ni = ligne - 1;
+								nj = col - 1;
+							}
+							case SUD_EST -> {
+								ni = ligne + 1;
+								nj = col + 1;
+							}
+							case SUD_OUEST -> {
+								ni = ligne + 1;
+								nj = col - 1;
+							}
+						}
+
+					}
+
+					if(ligne >= 8 && ligne <= 11 && col >= 4 && col <= 7 ) {
 						switch (dir) {
 							case NORD -> nj = col - 1;         // Haut
 							case SUD -> nj = col + 1;         // Bas
@@ -259,6 +311,5 @@ public class Plateau {
 		}
 		joueur.setPieces(pieces);
 	}
-
 
 }
