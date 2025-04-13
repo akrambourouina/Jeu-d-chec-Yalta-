@@ -20,8 +20,9 @@ public class Pion extends Piece {
 			// Test pour avancer de 2 cases depuis la position de départ
 			boolean estEnCaseDepart = switch (joueur.getCouleur()) {
 				case 0 -> position.getColonne() == 10; // blanc
-				case 1 -> position.getLigne() == 0;    // rouge
+				case 1 -> position.getColonne() == 1;    // rouge
 				case 2 -> position.getColonne() == 6;  // noir
+				case 3 -> position.getColonne() == 10 && position.getLigne() == 8;
 				default -> false;
 			};
 

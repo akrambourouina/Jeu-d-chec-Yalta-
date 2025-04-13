@@ -59,7 +59,7 @@ class Main {
 
 		plateau.initialiserVoisins(); // N'oublie pas ça !
 
-		Case caseTest = plateau.getCase(8, 6); // I9
+		Case caseTest = plateau.getCase(8, 9); // I9
 
 		System.out.println("Case test : " + caseTest);
 
@@ -74,7 +74,7 @@ class Main {
 
 		/////////////////////////////getdeplacement
 
-		Piece pion = plateau.getCase(2, 1).getPiece(); // pion blanc
+		Piece pion = plateau.getCase(8, 10).getPiece(); // pion blanc
 		List<Case> moves = pion.getDeplacementsPossibles(plateau);
 		System.out.println("Déplacements possibles de " + pion.getSymboleAvecJoueur() + " en " + pion.getPosition() + " :");
 		for (Case c : moves) {
