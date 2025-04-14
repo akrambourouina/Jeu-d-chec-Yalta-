@@ -98,8 +98,8 @@ public class Plateau {
 							case EST -> ni = ligne + 1;           // Droite
 							case OUEST -> ni = ligne - 1;         // Gauche
 							case NORD_EST -> {
-								ni = ligne - 1;
-								nj = col + 1;
+								ni = ligne + 1;
+								nj = col - 1;
 							}
 							case NORD_OUEST -> {
 								ni = ligne - 1;
@@ -110,8 +110,8 @@ public class Plateau {
 								nj = col + 1;
 							}
 							case SUD_OUEST -> {
-								ni = ligne + 1;
-								nj = col - 1;
+								ni = ligne - 1;
+								nj = col + 1;
 							}
 						}
 
@@ -125,19 +125,19 @@ public class Plateau {
 							case OUEST -> ni = ligne + 1;         // Gauche
 							case NORD_EST -> {
 								ni = ligne - 1;
-								nj = col + 1;
+								nj = col - 1;
 							}
 							case NORD_OUEST -> {
-								ni = ligne - 1;
+								ni = ligne + 1;
 								nj = col - 1;
 							}
 							case SUD_EST -> {
-								ni = ligne + 1;
+								ni = ligne - 1;
 								nj = col + 1;
 							}
 							case SUD_OUEST -> {
 								ni = ligne + 1;
-								nj = col - 1;
+								nj = col + 1;
 							}
 						}
 
@@ -151,19 +151,19 @@ public class Plateau {
 							case OUEST -> ni = ligne + 1;         // Gauche
 							case NORD_EST -> {
 								ni = ligne - 1;
-								nj = col + 1;
+								nj = col - 1;
 							}
 							case NORD_OUEST -> {
-								ni = ligne - 1;
+								ni = ligne + 1;
 								nj = col - 1;
 							}
 							case SUD_EST -> {
-								ni = ligne + 1;
+								ni = ligne - 1;
 								nj = col + 1;
 							}
 							case SUD_OUEST -> {
 								ni = ligne + 1;
-								nj = col - 1;
+								nj = col + 1;
 							}
 						}
 
@@ -177,19 +177,19 @@ public class Plateau {
 							case OUEST -> ni = ligne - 1;         // Gauche
 							case NORD_EST -> {
 								ni = ligne - 1;
-								nj = col + 1;
+								nj = col - 1;
 							}
 							case NORD_OUEST -> {
-								ni = ligne - 1;
+								ni = ligne + 1;
 								nj = col - 1;
 							}
 							case SUD_EST -> {
-								ni = ligne + 1;
+								ni = ligne - 1;
 								nj = col + 1;
 							}
 							case SUD_OUEST -> {
 								ni = ligne + 1;
-								nj = col - 1;
+								nj = col + 1;
 							}
 						}
 
