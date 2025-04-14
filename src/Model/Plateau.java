@@ -312,25 +312,5 @@ public class Plateau {
 		joueur.setPieces(pieces);
 	}
 
-	public void afficherPlateauAvecPieces() {
-		for (int i = 0; i < 12; i++) {
-			System.out.print((char) ('A' + i) + " ");
-			for (int j = 0; j < 12; j++) {
-				Case c = cases[i][j];
-				if (!c.estValide()) {
-					System.out.print("   ");
-				} else if (c.getPiece() != null) {
-					System.out.print(String.format("%-3s", c.getPiece().getSymboleAvecJoueur()));
-				} else {
-					System.out.print("•  ");
-				}
-			}
-			System.out.println();
-		}
-		System.out.print("   ");
-		for (int j = 0; j < 12; j++) {
-			System.out.print((j + 1) + (j + 1 < 10 ? "  " : " "));
-		}
-		System.out.println();
-	}
+
 }

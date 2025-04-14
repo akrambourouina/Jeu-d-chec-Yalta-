@@ -74,7 +74,12 @@ class Main {
 
 		/////////////////////////////getdeplacement
 
-		Piece pion = plateau.getCase(8, 10).getPiece(); // pion blanc
+		// On place une pièce ennemie à I9
+		Case cible1 = plateau.getCase(8, 9);
+		cible1.setPiece(new Fou(cible1, new Joueur("Rouge", 1))); // Un fou ennemi
+
+
+		Piece pion = plateau.getCase(9, 10).getPiece(); // pion blanc
 		List<Case> moves = pion.getDeplacementsPossibles(plateau);
 		System.out.println("Déplacements possibles de " + pion.getSymboleAvecJoueur() + " en " + pion.getPosition() + " :");
 		for (Case c : moves) {

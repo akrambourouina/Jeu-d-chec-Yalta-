@@ -11,6 +11,8 @@ public class Pion extends Piece {
 	@Override
 	public List<Case> getDeplacementsPossibles(Plateau plateau) {
 		List<Case> deplacements = new ArrayList<>();
+		//Direction avance = null;
+		//Direction[] captures = new Direction[2];
 
 		// Le pion avance vers son "NORD" défini dynamiquement
 		Case nord = position.getVoisin(Direction.NORD);
@@ -34,9 +36,13 @@ public class Pion extends Piece {
 			}
 		}
 
+
 		// Captures possibles sur les côtés du "nord"
+		// Captures possibles sur les diagonales (en fonction du joueur)
 		Direction[] directionsCaptures = switch (joueur.getCouleur()) {
-			case 0, 1, 2 -> new Direction[]{Direction.NORD_OUEST, Direction.NORD_EST};
+			case 0 -> new Direction[]{Direction.NORD_OUEST, Direction.SUD_OUEST}; // Blanc
+			case 1 -> new Direction[]{Direction.SUD_OUEST, Direction.SUD_EST};   // Rouge
+			case 2 -> new Direction[]{Direction.NORD_EST, Direction.SUD_EST};   // Noir
 			default -> new Direction[0];
 		};
 
@@ -47,6 +53,7 @@ public class Pion extends Piece {
 				deplacements.add(cible);
 			}
 		}
+
 
 		return deplacements;
 	}
