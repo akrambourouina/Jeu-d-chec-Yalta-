@@ -6,7 +6,7 @@ class Main {
 	public static void main(String[] args) {
 		Plateau plateau = new Plateau();
 
-		Case cible = plateau.getCase(0, 0); // E5
+		Case cible = plateau.getCase(0, 0); // A1
 		if (cible != null && cible.estValide()) {
 			System.out.println("Case cible : " + cible);
 			List<Case> voisins = plateau.getVoisins(cible);
@@ -57,9 +57,9 @@ class Main {
 		// ⚫ Pion noir (doit aller vers la droite)
 		//testDeplacementPion(plateau, 2, 6);   // pion noir en C7
 
-		plateau.initialiserVoisins(); // N'oublie pas ça !
+		plateau.initialiserVoisins();
 
-		Case caseTest = plateau.getCase(8, 9); // I9
+		Case caseTest = plateau.getCase(4, 3); // I9
 
 		System.out.println("Case test : " + caseTest);
 
@@ -86,6 +86,19 @@ class Main {
 			System.out.println(" - " + c);
 		}
 
+
+// Placer une tour blanche en E4
+		Case caseTour = plateau.getCase(4, 3); // E4
+		Tour tour = new Tour(caseTour, joueur1);
+		caseTour.setPiece(tour);
+
+// Test des déplacements
+		List<Case> deplacementsTour = tour.getDeplacementsPossibles(plateau);
+		System.out.println("\n===== TEST DES DÉPLACEMENTS DE LA TOUR =====");
+		System.out.println("Tour en " + caseTour + " (" + tour.getSymboleAvecJoueur() + ") peut aller sur :");
+		for (Case c : deplacementsTour) {
+			System.out.println(" - " + c);
+		}
 	}
 /*
 	public static void testDeplacementPion(Plateau plateau, int ligne, int colonne) {
