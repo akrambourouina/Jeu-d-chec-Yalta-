@@ -89,6 +89,7 @@ public class Plateau {
 								nj = col - 1;
 							}
 						}
+
 					}
 
 					if(ligne >= 8 && ligne <= 11 && col >= 8 && col <= 11 ) {
@@ -115,11 +116,21 @@ public class Plateau {
 							}
 						}
 
+
+
 					}
 
 					if(ligne >= 4 && ligne <= 7 && col >= 8 && col <= 11 ) {
 						switch (dir) {
-							case NORD -> nj = col - 1;         // Haut
+							case NORD -> {
+							if(col==8)
+							{
+								nj = 3;
+							}
+							else{
+								nj = col - 1;
+							}
+							}        // Haut
 							case SUD -> nj = col + 1;         // Bas
 							case EST -> ni = ligne - 1;           // Droite
 							case OUEST -> ni = ligne + 1;         // Gauche
@@ -139,6 +150,8 @@ public class Plateau {
 								ni = ligne + 1;
 								nj = col + 1;
 							}
+
+
 						}
 
 					}
@@ -242,8 +255,8 @@ public class Plateau {
 				if (ligne == 3 && col == 3) {
 					c.setVoisin(Direction.NORD, getCase(3, 4));
 					c.setVoisin(Direction.SUD, getCase(3, 2));
-					c.setVoisin(Direction.EST, getCase(2, 3));
-					c.setVoisin(Direction.OUEST, getCase(4,3));
+					c.setVoisin(Direction.EST, getCase(4, 3));
+					c.setVoisin(Direction.OUEST, getCase(2,3));
 				}
 
 
@@ -276,11 +289,11 @@ public class Plateau {
 
 		for (int i = 0; i < 8; i++) {
 			// pièces principales en colonne 11
-			pieces.add(PieceFactory.creer(ordre[i], getCase(lignes[i], 11), joueur));
+			//pieces.add(PieceFactory.creer(ordre[i], getCase(lignes[i], 11), joueur));
 			// pions en colonne 10
-			pieces.add(PieceFactory.creer(TypePiece.PION, getCase(lignes[i], 10), joueur));
+			//pieces.add(PieceFactory.creer(TypePiece.PION, getCase(lignes[i], 10), joueur));
 		}
-		pieces.add(PieceFactory.creer(TypePiece.PION, getCase(8, 8), joueur));
+		//pieces.add(PieceFactory.creer(TypePiece.PION, getCase(8, 8), joueur));
 
 		joueur.setPieces(pieces);
 	}
@@ -291,8 +304,8 @@ public class Plateau {
 		int[] lignes = {7,6,5,4,3,2,1,0};
 		TypePiece[] ordre = {TypePiece.TOUR, TypePiece.CAVALIER, TypePiece.FOU, TypePiece.REINE, TypePiece.ROI, TypePiece.FOU, TypePiece.CAVALIER, TypePiece.TOUR};
 		for (int i = 0; i < 8; i++) {
-			pieces.add(PieceFactory.creer(ordre[i], getCase(lignes[i], 0), joueur));
-			pieces.add(PieceFactory.creer(TypePiece.PION, getCase(lignes[i], 1), joueur));
+			//pieces.add(PieceFactory.creer(ordre[i], getCase(lignes[i], 0), joueur));
+			//pieces.add(PieceFactory.creer(TypePiece.PION, getCase(lignes[i], 1), joueur));
 		}
 		joueur.setPieces(pieces);
 	}
@@ -305,12 +318,32 @@ public class Plateau {
 		for (int i = 0; i < 8; i++) {
 			//pieces.add(PieceFactory.creer(ordre[i], getCase(ligneBase, colonnes[i]), joueur));
 			//pieces.add(PieceFactory.creer(TypePiece.PION, getCase(lignePions, colonnes[i]), joueur));
-			pieces.add(PieceFactory.creer(ordre[i], getCase(lignes[i], 7), joueur));
+			//pieces.add(PieceFactory.creer(ordre[i], getCase(lignes[i], 7), joueur));
 			// pions en colonne 10
-			pieces.add(PieceFactory.creer(TypePiece.PION, getCase(lignes[i], 6), joueur));
+			//pieces.add(PieceFactory.creer(TypePiece.PION, getCase(lignes[i], 6), joueur));
 		}
 		joueur.setPieces(pieces);
 	}
 
-
+	public void afficherPlateauAvecPieces() {
+		for (int i = 0; i < 12; i++) {
+			System.out.print((char) ('A' + i) + " ");
+			for (int j = 0; j < 12; j++) {
+				Case c = cases[i][j];
+				if (!c.estValide()) {
+					System.out.print("   ");
+				} else if (c.getPiece() != null) {
+					System.out.print(String.format("%-3s", c.getPiece().getSymboleAvecJoueur()));
+				} else {
+					System.out.print("•  ");
+				}
+			}
+			System.out.println();
+		}
+		System.out.print("   ");
+		for (int j = 0; j < 12; j++) {
+			System.out.print((j + 1) + (j + 1 < 10 ? "  " : " "));
+		}
+		System.out.println();
+	}
 }

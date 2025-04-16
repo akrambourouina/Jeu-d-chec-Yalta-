@@ -79,17 +79,17 @@ class Main {
 		cible1.setPiece(new Fou(cible1, new Joueur("Rouge", 1))); // Un fou ennemi
 
 
-		Piece pion = plateau.getCase(9, 10).getPiece(); // pion blanc
-		List<Case> moves = pion.getDeplacementsPossibles(plateau);
-		System.out.println("Déplacements possibles de " + pion.getSymboleAvecJoueur() + " en " + pion.getPosition() + " :");
-		for (Case c : moves) {
-			System.out.println(" - " + c);
-		}
+		//Piece pion = plateau.getCase(9, 10).getPiece(); // pion blanc
+		//List<Case> moves = pion.getDeplacementsPossibles(plateau);
+		//System.out.println("Déplacements possibles de " + pion.getSymboleAvecJoueur() + " en " + pion.getPosition() + " :");
+		//for (Case c : moves) {
+		//	System.out.println(" - " + c);
+		//}
 
 
 // Placer une tour blanche en E4
-		Case caseTour = plateau.getCase(4, 3); // E4
-		Tour tour = new Tour(caseTour, joueur1);
+		Case caseTour = plateau.getCase(5, 8); // E4
+		Tour tour = new Tour(caseTour, joueur0);
 		caseTour.setPiece(tour);
 
 // Test des déplacements
@@ -99,6 +99,7 @@ class Main {
 		for (Case c : deplacementsTour) {
 			System.out.println(" - " + c);
 		}
+
 	}
 /*
 	public static void testDeplacementPion(Plateau plateau, int ligne, int colonne) {

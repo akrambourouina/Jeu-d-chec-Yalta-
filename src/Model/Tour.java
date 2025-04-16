@@ -10,35 +10,54 @@ public class Tour extends Piece {
 
 	@Override
 	public List<Case> getDeplacementsPossibles(Plateau plateau) {
-		List<Case> deplacements = new ArrayList<>();
+		List<Case> deplacements = new ArrayList<>();//list
 		Direction[] directions = {Direction.NORD, Direction.SUD, Direction.EST, Direction.OUEST};
 
-		for (Direction dir : directions) {
+		for (Direction dirInitiale : directions) {
 			Case courant = this.position;
-			Direction entree = directionOpposee(dir);
+			Direction directionActuelle = dirInitiale;
+			boolean dejaInverse = false;
 
 			while (true) {
-				Case suivant = courant.getVoisin(dir);
+				Case suivant = courant.getVoisin(directionActuelle);
 				if (suivant == null || !suivant.estValide()) break;
 
-				// Vérifie que tu es bien ressorti du suivant par l’opposé de là où tu es rentré
-				if (suivant.getVoisin(entree) != courant) break;
-
-				// Si la case a une pièce
 				if (suivant.getPiece() != null) {
 					if (suivant.getPiece().getJoueur() != this.joueur) {
 						deplacements.add(suivant); // capture
 					}
 					break;
 				}
-
-				deplacements.add(suivant);
+				if(!deplacements.contains(suivant))
+				{deplacements.add(suivant);}
 				courant = suivant;
+
+				// Inverser direction UNE FOIS à l’entrée dans territoire adverse
+				if (!dejaInverse && estDansTerritoireAdverse(courant)) {
+					directionActuelle = directionOpposee(directionActuelle);
+					dejaInverse = true;
+				}
 			}
 		}
 
 		return deplacements;
 	}
+
+	// Méthode pour déterminer si une case est dans le territoire adverse
+	private boolean estDansTerritoireAdverse(Case c) {
+		int ligne = c.getLigne();
+		int colonne = c.getColonne();
+
+		// Exemple de définition du territoire adverse pour le joueur 0
+		if (this.joueur.getCouleur() == 0) {
+			return  (0<=c.getLigne()&&c.getLigne()<4||c.getLigne()>3&&c.getLigne()<8&&c.getColonne()<8||c.getLigne()>7 &&c.getLigne()<12 && c.getColonne()<8);
+
+		} else {
+			// Définir le territoire adverse pour le joueur 1
+			return (ligne >= 0 && ligne <= 3 && colonne >= 0 && colonne <= 3);
+		}
+	}
+
 
 
 
