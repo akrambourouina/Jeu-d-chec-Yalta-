@@ -59,7 +59,7 @@ class Main {
 
 		plateau.initialiserVoisins();
 
-		Case caseTest = plateau.getCase(4, 3); // I9
+		Case caseTest = plateau.getCase(9, 5); // I9
 
 		System.out.println("Case test : " + caseTest);
 
@@ -88,8 +88,8 @@ class Main {
 
 
 // Placer une tour blanche en E4
-		Case caseTour = plateau.getCase(3, 5); // E4
-		Tour tour = new Tour(caseTour, joueur2);
+		Case caseTour = plateau.getCase(10, 5); // E4
+		Tour tour = new Tour(caseTour, joueur0);
 		caseTour.setPiece(tour);
 
 // Test des déplacements

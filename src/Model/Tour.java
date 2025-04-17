@@ -19,45 +19,42 @@ public class Tour extends Piece {
 			boolean dejaInverse = false;
 
 			while (true) {
-				Case suivant = courant.getVoisin(directionActuelle);
+				Direction dirLogique = directionLocale(dirInitiale, estDansTerritoireAdverse(courant));
+				Case suivant = courant.getVoisin(dirLogique);
+
 				if (suivant == null || !suivant.estValide()) break;
 
 				if (suivant.getPiece() != null) {
 					if (suivant.getPiece().getJoueur() != this.joueur) {
-						deplacements.add(suivant); // capture
+						deplacements.add(suivant);
 					}
 					break;
 				}
-				if(!deplacements.contains(suivant))
-				{deplacements.add(suivant);}
-				courant = suivant;
 
-				// Inverser direction UNE FOIS à l’entrée dans territoire adverse
-				if (!dejaInverse && estDansTerritoireAdverse(courant)) {
-					directionActuelle = directionOpposee(directionActuelle);
-					dejaInverse = true;
-				}
+				deplacements.add(suivant);
+				courant = suivant;
 			}
+
 		}
 
 		return deplacements;
 	}
+	private Direction directionLocale(Direction globale, boolean inverse) {
+		return inverse ? directionOpposee(globale) : globale;
+	}
+
 
 	// Méthode pour déterminer si une case est dans le territoire adverse
 	private boolean estDansTerritoireAdverse(Case c) {
-		int ligne = c.getLigne();
-		int colonne = c.getColonne();
-
-		// Exemple de définition du territoire adverse pour le joueur 0
 		if (this.joueur.getCouleur() == 0) {
 			return  (0<=c.getLigne()&&c.getLigne()<4||c.getLigne()>3&&c.getLigne()<8&&c.getColonne()<8||c.getLigne()>7 &&c.getLigne()<12 && c.getColonne()<8);
 
 		} else if (this.joueur.getCouleur() == 1) {
 			return  (0<=c.getLigne()&&c.getLigne()<4&&c.getColonne()>=4&&c.getColonne()<8||c.getLigne()>7&&c.getLigne()<12&&c.getColonne()>7||c.getLigne()>3 &&c.getLigne()<8 && c.getColonne()>7);
 		}else if (this.joueur.getCouleur() == 2) {
-			return  (3>c.getLigne()&&c.getLigne()<8&& c.getColonne()<4||c.getLigne()>=0&&c.getLigne()<4&&c.getColonne()<4||c.getLigne()>7 &&c.getLigne()<12 && c.getColonne()>7);
+			return  (3<c.getLigne()&&c.getLigne()<8&& c.getColonne()<4||c.getLigne()>=0&&c.getLigne()<4&&c.getColonne()<4||c.getLigne()>7 &&c.getLigne()<12 && c.getColonne()>7);
 		}
-		return (ligne >= 0 && ligne <= 3 && colonne >= 0 && colonne <= 3);
+		return false;
 	}
 
 

@@ -68,17 +68,52 @@ public class Plateau {
 					// et EST/OUEST affectent les lignes
 					if(ligne >= 0 && ligne <= 7 && col >= 0 && col <= 3 ) {
 						switch (dir) {
-							case NORD -> nj = col + 1;
+							case NORD ->
+							{
+								if(col==3&&ligne>=4&&ligne<=7)
+								{
+									nj = 8;
+
+								} else if (col==3&&ligne>=0&&ligne<4) {
+									nj=4;
+								} else{
+									nj = col + 1;
+								}
+							}
 							case SUD -> nj = col - 1;
 							case EST -> ni = ligne + 1;
 							case OUEST -> ni = ligne - 1;
 							case NORD_EST -> {
-								ni = ligne + 1;
-								nj = col + 1;
+								{
+									if(col==3&&ligne>=4&&ligne<=7)
+									{
+										ni = ligne + 1;
+										nj = 8;
+									} else if (col==3&&ligne>=0&&ligne<4) {
+										ni = ligne + 1;
+										nj = 4;
+									} else{
+										ni = ligne + 1;
+										nj = col + 1;
+									}
+								}
+
 							}
 							case NORD_OUEST -> {
-								ni = ligne - 1;
-								nj = col + 1;
+								{
+									if(col==3&&ligne>=4&&ligne<=7)
+									{
+										ni = ligne - 1;
+										nj = 8;
+									} else if (col==3&&ligne>=0&&ligne<4) {
+										ni = ligne - 1;
+										nj = 4;
+									} else{
+										ni = ligne - 1;
+										nj = col + 1;
+									}
+								}
+
 							}
 							case SUD_EST -> {
 								ni = ligne + 1;
@@ -94,25 +129,77 @@ public class Plateau {
 
 					if(ligne >= 8 && ligne <= 11 && col >= 8 && col <= 11 ) {
 						switch (dir) {
-							case NORD -> nj = col - 1;         // Haut
+							case NORD ->
+							{
+								if(col==8)
+								{
+									nj = 4;
+								}
+								else{
+									nj = col - 1;
+								}
+							}
+							        // Haut
 							case SUD -> nj = col + 1;         // Bas
 							case EST -> ni = ligne + 1;           // Droite
-							case OUEST -> ni = ligne - 1;         // Gauche
+							case OUEST ->
+							{
+								if(ligne==8)
+								{
+									ni = 4;
+								}
+								else{
+									ni = ligne - 1;
+								}
+							}
+									        // Gauche
 							case NORD_EST -> {
-								ni = ligne + 1;
-								nj = col - 1;
+								{
+									if(col==8)
+									{
+										ni = ligne + 1;
+										nj = 4;
+									}
+									else{
+										ni = ligne + 1;
+										nj = col - 1;
+									}
+								}
+
 							}
 							case NORD_OUEST -> {
-								ni = ligne - 1;
-								nj = col - 1;
+								{
+									if(col==8)
+									{
+										ni = ligne - 1;
+										nj = 4;
+									} else if (ligne==8) {
+										ni = 4;
+										nj = col - 1;
+									} else{
+										ni = ligne - 1;
+										nj = col - 1;
+									}
+								}
+
 							}
 							case SUD_EST -> {
 								ni = ligne + 1;
 								nj = col + 1;
 							}
 							case SUD_OUEST -> {
-								ni = ligne - 1;
-								nj = col + 1;
+								{
+									if(ligne==8)
+									{
+										ni = 4;
+										nj = col + 1;
+									}
+									else{
+										ni = ligne - 1;
+										nj = col + 1;
+									}
+								}
+
 							}
 						}
 
@@ -132,19 +219,57 @@ public class Plateau {
 							}
 							}        // Haut
 							case SUD -> nj = col + 1;         // Bas
-							case EST -> ni = ligne - 1;           // Droite
+							case EST ->
+							{
+								if(ligne==4)
+								{
+									ni = 8;
+								}
+								else{
+									ni = ligne - 1;
+								}
+							}           // Droite
 							case OUEST -> ni = ligne + 1;         // Gauche
 							case NORD_EST -> {
-								ni = ligne - 1;
-								nj = col - 1;
+								if(col==8)
+								{
+									ni = ligne - 1;
+									nj = 3;
+								}
+								else if(ligne==4)
+								{
+									ni = 8;
+									nj = col - 1;
+								}
+								else {
+									ni = ligne - 1;
+									nj = col - 1;
+								}
+
 							}
 							case NORD_OUEST -> {
-								ni = ligne + 1;
-								nj = col - 1;
+								if(col==8)
+								{
+									ni = ligne + 1;
+									nj = 3;
+								}
+								else{
+									ni = ligne + 1;
+									nj = col - 1;
+								}
 							}
 							case SUD_EST -> {
-								ni = ligne - 1;
-								nj = col + 1;
+
+								if(ligne==4)
+								{
+									ni = 8;
+									nj = col + 1;
+								}
+								else{
+									ni = ligne - 1;
+									nj = col + 1;
+								}
+
 							}
 							case SUD_OUEST -> {
 								ni = ligne + 1;
@@ -158,25 +283,79 @@ public class Plateau {
 
 					if(ligne >= 0 && ligne <= 3 && col >= 4 && col <= 7 ) {
 						switch (dir) {
-							case NORD -> nj = col - 1;         // Haut
+							case NORD ->
+							{
+								if(col==4)
+								{
+									nj = 3;
+								}
+								else{
+									nj = col - 1;
+								}
+							}         // Haut
 							case SUD -> nj = col + 1;         // Bas
 							case EST -> ni = ligne - 1;           // Droite
-							case OUEST -> ni = ligne + 1;         // Gauche
+							case OUEST ->
+							{
+								if(ligne==3)
+								{
+									ni = 8;
+									nj = col;
+								}
+								else{
+									ni = ligne + 1;
+									nj = col;
+								}
+							}          // Gauche
 							case NORD_EST -> {
-								ni = ligne - 1;
-								nj = col - 1;
+
+								{
+									if(col==4)
+									{
+										ni = ligne - 1;
+										nj = 3;
+									}
+									else{
+										ni = ligne - 1;
+										nj = col - 1;
+									}
+								}
+
 							}
 							case NORD_OUEST -> {
-								ni = ligne + 1;
-								nj = col - 1;
+								{
+									if(col==4)
+									{
+										ni = ligne + 1;
+										nj = 3;
+									} else if (ligne==3) {
+										ni = 8;
+										nj = col - 1;
+									} else{
+										ni = ligne + 1;
+										nj = col - 1;
+									}
+								}
+
 							}
 							case SUD_EST -> {
+
 								ni = ligne - 1;
 								nj = col + 1;
 							}
 							case SUD_OUEST -> {
-								ni = ligne + 1;
-								nj = col + 1;
+								{
+									if(ligne==3)
+									{
+										ni = 8;
+										nj = col + 1;
+									}
+									else{
+										ni = ligne + 1;
+										nj = col + 1;
+									}
+								}
+
 							}
 						}
 
@@ -184,21 +363,83 @@ public class Plateau {
 
 					if(ligne >= 8 && ligne <= 11 && col >= 4 && col <= 7 ) {
 						switch (dir) {
-							case NORD -> nj = col - 1;         // Haut
-							case SUD -> nj = col + 1;         // Bas
-							case EST -> ni = ligne + 1;           // Droite
+							case NORD ->
+							{
+								if(col==4)
+								{
+									nj = 8;
+								}
+								else{
+									nj = col - 1;         // Haut
+								}
+							}
+
+						case SUD ->
+						{
+							if(col==7)
+							{
+								nj=-1;
+							}
+							else{
+								nj = col + 1;
+							}
+						}        // Bas
+							case EST ->
+							{
+								if(ligne==8)
+								{
+									ni = 3;
+									nj = col;
+								}
+								else{
+									ni = ligne + 1;
+									nj = col;
+								}
+							}        // Droite
 							case OUEST -> ni = ligne - 1;         // Gauche
 							case NORD_EST -> {
-								ni = ligne - 1;
-								nj = col - 1;
+								{
+									if(col==4)
+									{
+										ni = ligne - 1;
+										nj = 8;
+									} else if (ligne==8) {
+										ni = 3;
+										nj = col - 1;
+									} else{
+										ni = ligne - 1;
+										nj = col - 1;
+									}
+								}
+
 							}
 							case NORD_OUEST -> {
-								ni = ligne + 1;
-								nj = col - 1;
+								{
+									if(col==4)
+									{
+										ni = ligne + 1;
+										nj = 8;
+									}
+									else{
+										ni = ligne + 1;
+										nj = col - 1;
+									}
+								}
+
 							}
 							case SUD_EST -> {
-								ni = ligne - 1;
-								nj = col + 1;
+								{
+									if(ligne==8)
+									{
+										ni = 3;
+										nj = col + 1;
+									}
+									else{
+										ni = ligne - 1;
+										nj = col + 1;
+									}
+								}
+
 							}
 							case SUD_OUEST -> {
 								ni = ligne + 1;
@@ -207,6 +448,7 @@ public class Plateau {
 						}
 
 					}
+
 					Case voisine = getCase(ni, nj);
 					if (voisine != null && voisine.estValide()) {
 						c.setVoisin(dir, voisine);
@@ -262,6 +504,9 @@ public class Plateau {
 
 			}
 		}
+		System.out.println("Voisin OUEST de D6 : " + getCase(3, 5).getVoisin(Direction.OUEST));
+		System.out.println("Voisin EST de I6 : " + getCase(8, 5).getVoisin(Direction.EST));
+
 	}
 
 
