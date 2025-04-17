@@ -52,10 +52,12 @@ public class Tour extends Piece {
 		if (this.joueur.getCouleur() == 0) {
 			return  (0<=c.getLigne()&&c.getLigne()<4||c.getLigne()>3&&c.getLigne()<8&&c.getColonne()<8||c.getLigne()>7 &&c.getLigne()<12 && c.getColonne()<8);
 
-		} else {
-			// Définir le territoire adverse pour le joueur 1
-			return (ligne >= 0 && ligne <= 3 && colonne >= 0 && colonne <= 3);
+		} else if (this.joueur.getCouleur() == 1) {
+			return  (0<=c.getLigne()&&c.getLigne()<4&&c.getColonne()>=4&&c.getColonne()<8||c.getLigne()>7&&c.getLigne()<12&&c.getColonne()>7||c.getLigne()>3 &&c.getLigne()<8 && c.getColonne()>7);
+		}else if (this.joueur.getCouleur() == 2) {
+			return  (3>c.getLigne()&&c.getLigne()<8&& c.getColonne()<4||c.getLigne()>=0&&c.getLigne()<4&&c.getColonne()<4||c.getLigne()>7 &&c.getLigne()<12 && c.getColonne()>7);
 		}
+		return (ligne >= 0 && ligne <= 3 && colonne >= 0 && colonne <= 3);
 	}
 
 

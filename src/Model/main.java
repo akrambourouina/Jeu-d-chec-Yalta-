@@ -88,8 +88,8 @@ class Main {
 
 
 // Placer une tour blanche en E4
-		Case caseTour = plateau.getCase(5, 8); // E4
-		Tour tour = new Tour(caseTour, joueur0);
+		Case caseTour = plateau.getCase(3, 5); // E4
+		Tour tour = new Tour(caseTour, joueur2);
 		caseTour.setPiece(tour);
 
 // Test des déplacements
