@@ -140,7 +140,15 @@ public class Plateau {
 								}
 							}
 							        // Haut
-							case SUD -> nj = col + 1;         // Bas
+							case SUD ->{
+							if(col==11)
+							{
+								nj=-1;
+							}else{
+								nj = col + 1;
+							}
+
+							}       // Bas
 							case EST -> ni = ligne + 1;           // Droite
 							case OUEST ->
 							{
@@ -392,11 +400,21 @@ public class Plateau {
 									nj = col;
 								}
 								else{
-									ni = ligne + 1;
+									ni = ligne - 1;
 									nj = col;
 								}
 							}        // Droite
-							case OUEST -> ni = ligne - 1;         // Gauche
+							case OUEST ->
+							{
+								if(ligne==11)
+								{
+									ni=-1;
+								}
+								else{
+									ni = ligne + 1;
+								}
+							}
+									        // Gauche
 							case NORD_EST -> {
 								{
 									if(col==4)
@@ -569,6 +587,26 @@ public class Plateau {
 		}
 		joueur.setPieces(pieces);
 	}
-
+	public void afficherPlateauAvecPieces() {
+		for (int i = 0; i < 12; i++) {
+			System.out.print((char) ('A' + i) + " ");
+			for (int j = 0; j < 12; j++) {
+				Case c = cases[i][j];
+				if (!c.estValide()) {
+					System.out.print("   ");
+				} else if (c.getPiece() != null) {
+					System.out.print(String.format("%-3s", c.getPiece().getSymboleAvecJoueur()));
+				} else {
+					System.out.print("•  ");
+				}
+			}
+			System.out.println();
+		}
+		System.out.print("   ");
+		for (int j = 0; j < 12; j++) {
+			System.out.print((j + 1) + (j + 1 < 10 ? "  " : " "));
+		}
+		System.out.println();
+	}
 
 }

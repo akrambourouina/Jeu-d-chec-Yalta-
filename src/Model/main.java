@@ -59,7 +59,7 @@ class Main {
 
 		plateau.initialiserVoisins();
 
-		Case caseTest = plateau.getCase(9, 5); // I9
+		Case caseTest = plateau.getCase(9, 9); // I9
 
 		System.out.println("Case test : " + caseTest);
 
@@ -71,12 +71,24 @@ class Main {
 
 		}
 
+		Case caseTest2 = plateau.getCase(5, 3); // I9
+
+		System.out.println("Case test2 : " + caseTest2);
+
+		for (Direction dir : Direction.values()) {
+			Case voisin = caseTest2.getVoisin(dir);
+			if (voisin != null) {
+				System.out.println(" - " + dir + " → " + voisin);
+			}
+
+		}
+
 
 		/////////////////////////////getdeplacement
 
 		// On place une pièce ennemie à I9
-		Case cible1 = plateau.getCase(8, 9);
-		cible1.setPiece(new Fou(cible1, new Joueur("Rouge", 1))); // Un fou ennemi
+		//Case cible1 = plateau.getCase(8, 9);
+		//cible1.setPiece(new Fou(cible1, new Joueur("Rouge", 1))); // Un fou ennemi
 
 
 		//Piece pion = plateau.getCase(9, 10).getPiece(); // pion blanc
@@ -88,8 +100,8 @@ class Main {
 
 
 // Placer une tour blanche en E4
-		Case caseTour = plateau.getCase(10, 5); // E4
-		Tour tour = new Tour(caseTour, joueur0);
+		Case caseTour = plateau.getCase(2, 5); // E4
+		Tour tour = new Tour(caseTour, joueur1);
 		caseTour.setPiece(tour);
 
 // Test des déplacements
