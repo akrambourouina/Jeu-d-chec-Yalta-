@@ -44,7 +44,7 @@ class Main {
 		plateau.initialiserJoueurGaucheYalta(joueur1);
 		plateau.initialiserJoueurHautYalta(joueur2);
 
-		plateau.afficherPlateauAvecPieces();
+		//plateau.afficherPlateauAvecPieces();
 
 		System.out.println("\n===== TEST DES DÉPLACEMENTS DES PIONS =====");
 
@@ -71,7 +71,7 @@ class Main {
 
 		}
 
-		Case caseTest2 = plateau.getCase(5, 3); // I9
+		Case caseTest2 = plateau.getCase(9, 4); // I9
 
 		System.out.println("Case test2 : " + caseTest2);
 
@@ -100,7 +100,7 @@ class Main {
 
 
 // Placer une tour blanche en E4
-		Case caseTour = plateau.getCase(2, 2); // E4
+	/*	Case caseTour = plateau.getCase(2, 2); // E4
 		Tour tour = new Tour(caseTour, joueur2);
 		caseTour.setPiece(tour);
 
@@ -109,6 +109,17 @@ class Main {
 		System.out.println("\n===== TEST DES DÉPLACEMENTS DE LA TOUR =====");
 		System.out.println("Tour en " + caseTour + " (" + tour.getSymboleAvecJoueur() + ") peut aller sur :");
 		for (Case c : deplacementsTour) {
+			System.out.println(" - " + c);
+		}*/
+
+		Case caseFou = plateau.getCase(10, 10); // C6
+		Fou fouNoir = new Fou(caseFou, joueur2);
+		caseFou.setPiece(fouNoir);
+
+		System.out.println("\n===== TEST DES DÉPLACEMENTS DU FOU NOIR =====");
+		System.out.println("Fou en " + caseFou + " (" + fouNoir.getSymboleAvecJoueur() + ") peut aller sur :");
+		List<Case> deplacementsFou = fouNoir.getDeplacementsPossibles(plateau);
+		for (Case c : deplacementsFou) {
 			System.out.println(" - " + c);
 		}
 

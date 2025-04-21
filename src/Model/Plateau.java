@@ -480,6 +480,7 @@ public class Plateau {
 					c.setVoisin(Direction.SUD, getCase(4, 2));
 					c.setVoisin(Direction.EST, getCase(5, 3));
 					c.setVoisin(Direction.OUEST, getCase(3, 3));
+					c.setVoisin(Direction.NORD_OUEST, getCase(8, 8));
 				}
 				// I9
 				if (ligne == 8 && col == 8) {
@@ -487,14 +488,16 @@ public class Plateau {
 					c.setVoisin(Direction.SUD, getCase(8, 9));
 					c.setVoisin(Direction.EST, getCase(9, 8));
 					c.setVoisin(Direction.OUEST, getCase(4, 8));
+					c.setVoisin(Direction.NORD_OUEST, getCase(3, 4));
 
 				}
 				// I5
 				if (ligne == 8 && col ==4) {
-					c.setVoisin(Direction.NORD, getCase(4, 3));
+					//c.setVoisin(Direction.NORD, getCase(4, 3));
 					c.setVoisin(Direction.SUD, getCase(8, 5));
 					c.setVoisin(Direction.EST, getCase(3, 4));
 					c.setVoisin(Direction.OUEST, getCase(9, 4));
+					c.setVoisin(Direction.NORD_EST, getCase(4, 8));
 
 				}
 				//E9
@@ -503,6 +506,7 @@ public class Plateau {
 					c.setVoisin(Direction.SUD, getCase(4, 9));
 					c.setVoisin(Direction.EST, getCase(8, 8));
 					c.setVoisin(Direction.OUEST, getCase(5,8 ));
+					c.setVoisin(Direction.NORD_EST, getCase(3, 3));
 				}
 				//D5
 				if (ligne == 3 && col == 4) {
@@ -510,6 +514,7 @@ public class Plateau {
 					c.setVoisin(Direction.SUD, getCase(3, 5));
 					c.setVoisin(Direction.EST, getCase(2, 4));
 					c.setVoisin(Direction.OUEST, getCase(8,4 ));
+					c.setVoisin(Direction.NORD_OUEST, getCase(4,3));
 				}
 				//D4
 				if (ligne == 3 && col == 3) {
@@ -517,6 +522,7 @@ public class Plateau {
 					c.setVoisin(Direction.SUD, getCase(3, 2));
 					c.setVoisin(Direction.EST, getCase(4, 3));
 					c.setVoisin(Direction.OUEST, getCase(2,3));
+					c.setVoisin(Direction.NORD_EST, getCase(8,4));
 				}
 
 
@@ -587,26 +593,6 @@ public class Plateau {
 		}
 		joueur.setPieces(pieces);
 	}
-	public void afficherPlateauAvecPieces() {
-		for (int i = 0; i < 12; i++) {
-			System.out.print((char) ('A' + i) + " ");
-			for (int j = 0; j < 12; j++) {
-				Case c = cases[i][j];
-				if (!c.estValide()) {
-					System.out.print("   ");
-				} else if (c.getPiece() != null) {
-					System.out.print(String.format("%-3s", c.getPiece().getSymboleAvecJoueur()));
-				} else {
-					System.out.print("•  ");
-				}
-			}
-			System.out.println();
-		}
-		System.out.print("   ");
-		for (int j = 0; j < 12; j++) {
-			System.out.print((j + 1) + (j + 1 < 10 ? "  " : " "));
-		}
-		System.out.println();
-	}
+
 
 }
