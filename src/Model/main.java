@@ -87,7 +87,7 @@ class Main {
 		/////////////////////////////getdeplacement
 
 		// On place une pièce ennemie à I9
-		//Case cible1 = plateau.getCase(8, 9);
+		//Case cible1 = plateau.getCase(2, 4);
 		//cible1.setPiece(new Fou(cible1, new Joueur("Rouge", 1))); // Un fou ennemi
 
 
@@ -100,8 +100,8 @@ class Main {
 
 
 // Placer une tour blanche en E4
-		Case caseTour = plateau.getCase(2, 5); // E4
-		Tour tour = new Tour(caseTour, joueur1);
+		Case caseTour = plateau.getCase(2, 2); // E4
+		Tour tour = new Tour(caseTour, joueur2);
 		caseTour.setPiece(tour);
 
 // Test des déplacements
