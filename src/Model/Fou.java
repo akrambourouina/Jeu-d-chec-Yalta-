@@ -40,8 +40,9 @@ public class Fou extends Piece {
 						if (pont.getPiece() != null) {
 							if (pont.getPiece().getJoueur() != this.joueur) {
 								deplacements.add(pont);
+								break;
 							}
-							break;
+
 						}
 						deplacements.add(pont);
 						int ligneSuiv = pont.getLigne() + 1;
@@ -57,8 +58,9 @@ public class Fou extends Piece {
 						if (pont.getPiece() != null) {
 							if (pont.getPiece().getJoueur() != this.joueur) {
 								deplacements.add(pont);
+								break;
 							}
-							break;
+
 						}
 						deplacements.add(pont);
 						int ligneSuiv = pont.getLigne() - 1;
@@ -74,8 +76,9 @@ public class Fou extends Piece {
 						if (pont.getPiece() != null) {
 							if (pont.getPiece().getJoueur() != this.joueur) {
 								deplacements.add(pont);
+								break;
 							}
-							break;
+
 						}
 						deplacements.add(pont);
 						int ligneSuiv = pont.getLigne() + 1;
@@ -91,8 +94,9 @@ public class Fou extends Piece {
 						if (pont.getPiece() != null) {
 							if (pont.getPiece().getJoueur() != this.joueur) {
 								deplacements.add(pont);
+								break;
 							}
-							break;
+
 						}
 						deplacements.add(pont);
 						int ligneSuiv = pont.getLigne() - 1;
@@ -108,8 +112,9 @@ public class Fou extends Piece {
 						if (pont.getPiece() != null) {
 							if (pont.getPiece().getJoueur() != this.joueur) {
 								deplacements.add(pont);
+								break;
 							}
-							break;
+
 						}
 						deplacements.add(pont);
 						int ligneSuiv = pont.getLigne() + 1;
@@ -125,8 +130,9 @@ public class Fou extends Piece {
 						if (pont.getPiece() != null) {
 							if (pont.getPiece().getJoueur() != this.joueur) {
 								deplacements.add(pont);
+								break;
 							}
-							break;
+
 						}
 						deplacements.add(pont);
 						int ligneSuiv = pont.getLigne() + 1;

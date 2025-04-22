@@ -87,8 +87,8 @@ class Main {
 		/////////////////////////////getdeplacement
 
 		// On place une pièce ennemie à I9
-		//Case cible1 = plateau.getCase(2, 4);
-		//cible1.setPiece(new Fou(cible1, new Joueur("Rouge", 1))); // Un fou ennemi
+		//Case cible1 = plateau.getCase(8, 4);
+		//cible1.setPiece(new Fou(cible1, new Joueur("Rouge", 2))); // Un fou ennemi
 
 
 		//Piece pion = plateau.getCase(9, 10).getPiece(); // pion blanc
@@ -112,7 +112,9 @@ class Main {
 			System.out.println(" - " + c);
 		}*/
 
-		Case caseFou = plateau.getCase(6, 10); // C6
+		/////fou
+
+	/*	Case caseFou = plateau.getCase(1, 1); // C6
 		Fou fouNoir = new Fou(caseFou, joueur1);
 		caseFou.setPiece(fouNoir);
 
@@ -122,6 +124,23 @@ class Main {
 		for (Case c : deplacementsFou) {
 			System.out.println(" - " + c);
 		}
+		*/
+		/////////////
+
+		// reine
+		Case caseReine = plateau.getCase(4, 2);
+		Reine reine = new Reine(caseReine, joueur0); // joueur0 : couleur 0 = blanc
+		caseReine.setPiece(reine);
+
+
+		System.out.println("\n===== TEST DES DÉPLACEMENTS DE LA REINE =====");
+		System.out.println("Reine en " + caseReine + " (" + reine.getSymboleAvecJoueur() + ") peut aller sur :");
+
+		List<Case> deplacementsReine = reine.getDeplacementsPossibles(plateau);
+		for (Case c : deplacementsReine) {
+			System.out.println(" - " + c);
+		}
+
 
 	}
 /*

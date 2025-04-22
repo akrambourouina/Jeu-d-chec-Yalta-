@@ -11,17 +11,13 @@ public class Reine extends Piece {
 	@Override
 	public List<Case> getDeplacementsPossibles(Plateau plateau) {
 		List<Case> deplacements = new ArrayList<>();
-		for (Direction dir : Direction.values()) {
-			int i = position.getLigne() + dir.dLigne;
-			int j = position.getColonne() + dir.dColonne;
-			while (true) {
-				Case cible = plateau.getCase(i, j);
-				if (cible == null || !cible.estValide() || cible.getPiece() != null) break;
-				deplacements.add(cible);
-				i += dir.dLigne;
-				j += dir.dColonne;
-			}
-		}
+
+		Fou fouTemp = new Fou(this.position, this.joueur);
+		deplacements.addAll(fouTemp.getDeplacementsPossibles(plateau));
+
+		Tour tourTemp = new Tour(this.position, this.joueur);
+		deplacements.addAll(tourTemp.getDeplacementsPossibles(plateau));
+
 		return deplacements;
 	}
 
