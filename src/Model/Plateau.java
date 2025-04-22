@@ -260,7 +260,7 @@ public class Plateau {
 								{
 									ni = ligne + 1;
 									nj = 3;
-								} else if (col==9 && ligne==7) {
+								} else if (col==9 && ligne==7 || col==10&& ligne==7) {
 									ni = -1;
 									nj = -1;
 								} else{
@@ -282,8 +282,15 @@ public class Plateau {
 
 							}
 							case SUD_OUEST -> {
-								ni = ligne + 1;
-								nj = col + 1;
+								if(ligne==7 && col==10)
+								{
+									ni = -1;
+									nj = -1;
+								}else {
+									ni = ligne + 1;
+									nj = col + 1;
+								}
+
 							}
 
 

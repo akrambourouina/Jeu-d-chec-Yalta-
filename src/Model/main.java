@@ -44,7 +44,7 @@ class Main {
 		plateau.initialiserJoueurGaucheYalta(joueur1);
 		plateau.initialiserJoueurHautYalta(joueur2);
 
-	//	plateau.afficherPlateauAvecPieces();
+		//plateau.afficherPlateauAvecPieces();
 
 		System.out.println("\n===== TEST DES DÉPLACEMENTS DES PIONS =====");
 
@@ -112,7 +112,7 @@ class Main {
 			System.out.println(" - " + c);
 		}*/
 
-		Case caseFou = plateau.getCase(10, 10); // C6
+		Case caseFou = plateau.getCase(6, 10); // C6
 		Fou fouNoir = new Fou(caseFou, joueur1);
 		caseFou.setPiece(fouNoir);
 
