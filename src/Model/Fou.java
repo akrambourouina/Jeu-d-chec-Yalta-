@@ -38,7 +38,7 @@ public class Fou extends Piece {
 					Case pont = plateau.getCase(4, 8);
 					while (pont != null && pont.estValide()) {
 						if (pont.getPiece() != null) {
-							if (pont.getPiece().getJoueur() != this.joueur) {
+							if (pont.getPiece().getJoueur().getCouleur() != this.joueur.getCouleur()) {
 								deplacements.add(pont);
 								break;
 							}
@@ -56,7 +56,7 @@ public class Fou extends Piece {
 					Case pont = plateau.getCase(3, 4);
 					while (pont != null && pont.estValide()) {
 						if (pont.getPiece() != null) {
-							if (pont.getPiece().getJoueur() != this.joueur) {
+							if (pont.getPiece().getJoueur().getCouleur() != this.joueur.getCouleur()) {
 								deplacements.add(pont);
 								break;
 							}
@@ -74,7 +74,7 @@ public class Fou extends Piece {
 					Case pont = plateau.getCase(8, 8);
 					while (pont != null && pont.estValide()) {
 						if (pont.getPiece() != null) {
-							if (pont.getPiece().getJoueur() != this.joueur) {
+							if (pont.getPiece().getJoueur().getCouleur() != this.joueur.getCouleur()) {
 								deplacements.add(pont);
 								break;
 							}
@@ -92,7 +92,7 @@ public class Fou extends Piece {
 					Case pont = plateau.getCase(3, 3);
 					while (pont != null && pont.estValide()) {
 						if (pont.getPiece() != null) {
-							if (pont.getPiece().getJoueur() != this.joueur) {
+							if (pont.getPiece().getJoueur().getCouleur() != this.joueur.getCouleur()) {
 								deplacements.add(pont);
 								break;
 							}
@@ -110,7 +110,7 @@ public class Fou extends Piece {
 					Case pont = plateau.getCase(4, 3);
 					while (pont != null && pont.estValide()) {
 						if (pont.getPiece() != null) {
-							if (pont.getPiece().getJoueur() != this.joueur) {
+							if (pont.getPiece().getJoueur().getCouleur() != this.joueur.getCouleur()) {
 								deplacements.add(pont);
 								break;
 							}
@@ -128,7 +128,7 @@ public class Fou extends Piece {
 					Case pont = plateau.getCase(8, 4);
 					while (pont != null && pont.estValide()) {
 						if (pont.getPiece() != null) {
-							if (pont.getPiece().getJoueur() != this.joueur) {
+							if (pont.getPiece().getJoueur().getCouleur() != this.joueur.getCouleur()) {
 								deplacements.add(pont);
 								break;
 							}
@@ -150,7 +150,7 @@ public class Fou extends Piece {
 
 					if (suivant.getPiece() == null) {
 						deplacements.add(suivant);
-					} else if (suivant.getPiece().getJoueur() != this.joueur) {
+					} else if (suivant.getPiece().getJoueur().getCouleur() != this.joueur.getCouleur()) {
 						deplacements.add(suivant);
 					}
 					courant = suivant;
@@ -158,7 +158,7 @@ public class Fou extends Piece {
 				}
 
 				if (suivant.getPiece() != null) {
-					if (suivant.getPiece().getJoueur() == this.joueur) break;
+					if (suivant.getPiece().getJoueur().getCouleur() == this.joueur.getCouleur()) break;
 					else {
 						deplacements.add(suivant);
 						break;

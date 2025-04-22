@@ -87,7 +87,8 @@ class Main {
 		/////////////////////////////getdeplacement
 
 		// On place une pièce ennemie à I9
-		//Case cible1 = plateau.getCase(8, 4);
+
+		//Case cible1 = plateau.getCase(7, 1);
 		//cible1.setPiece(new Fou(cible1, new Joueur("Rouge", 2))); // Un fou ennemi
 
 
@@ -100,7 +101,7 @@ class Main {
 
 
 // Placer une tour blanche en E4
-	/*	Case caseTour = plateau.getCase(2, 2); // E4
+		/*Case caseTour = plateau.getCase(7, 0); // E4
 		Tour tour = new Tour(caseTour, joueur2);
 		caseTour.setPiece(tour);
 
@@ -114,7 +115,7 @@ class Main {
 
 		/////fou
 
-	/*	Case caseFou = plateau.getCase(1, 1); // C6
+		/*Case caseFou = plateau.getCase(5, 8); // C6
 		Fou fouNoir = new Fou(caseFou, joueur1);
 		caseFou.setPiece(fouNoir);
 
@@ -123,12 +124,12 @@ class Main {
 		List<Case> deplacementsFou = fouNoir.getDeplacementsPossibles(plateau);
 		for (Case c : deplacementsFou) {
 			System.out.println(" - " + c);
-		}
-		*/
+		}*/
+
 		/////////////
 
 		// reine
-		Case caseReine = plateau.getCase(4, 2);
+		/*Case caseReine = plateau.getCase(4, 2);
 		Reine reine = new Reine(caseReine, joueur0); // joueur0 : couleur 0 = blanc
 		caseReine.setPiece(reine);
 
@@ -139,7 +140,24 @@ class Main {
 		List<Case> deplacementsReine = reine.getDeplacementsPossibles(plateau);
 		for (Case c : deplacementsReine) {
 			System.out.println(" - " + c);
+		}*/
+///////////////////////
+
+		////////Roi
+
+		Case caseRoi = plateau.getCase(4, 3); // D4
+		Roi roi = new Roi(caseRoi, joueur0);
+		caseRoi.setPiece(roi);
+
+
+// Test des déplacements du roi
+		List<Case> deplacementsRoi = roi.getDeplacementsPossibles(plateau);
+		System.out.println("\n===== TEST DES DÉPLACEMENTS DU ROI =====");
+		System.out.println("Roi en " + caseRoi + " (" + roi.getSymboleAvecJoueur() + ") peut aller sur :");
+		for (Case c : deplacementsRoi) {
+			System.out.println(" - " + c);
 		}
+
 
 
 	}

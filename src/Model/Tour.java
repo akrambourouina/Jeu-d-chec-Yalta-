@@ -46,7 +46,7 @@ public class Tour extends Piece {
 					// Vérifie et ajoute la case d’inversion si valide
 					if (suivant.getPiece() == null) {
 						deplacements.add(suivant);
-					} else if (suivant.getPiece().getJoueur() != this.joueur) {
+					} else if (suivant.getPiece().getJoueur().getCouleur() != this.joueur.getCouleur()) {
 						deplacements.add(suivant);
 					}
 					courant = suivant;
@@ -55,7 +55,7 @@ public class Tour extends Piece {
 
 
 				if (suivant.getPiece() != null) {
-					if (suivant.getPiece().getJoueur() == this.joueur) {
+					if (suivant.getPiece().getJoueur().getCouleur() == this.joueur.getCouleur()) {
 						break;
 					} else {
 						deplacements.add(suivant);
