@@ -88,10 +88,14 @@ class Main {
 
 		// On place une pièce ennemie à I9
 
-		//Case cible1 = plateau.getCase(7, 1);
-		//cible1.setPiece(new Fou(cible1, new Joueur("Rouge", 2))); // Un fou ennemi
+		Case cible1 = plateau.getCase(4, 8);
+		cible1.setPiece(new Fou(cible1, new Joueur("Rouge", 	0))); // Un fou ennemi
 
+		Case cible2 = plateau.getCase(9, 8);
+		cible1.setPiece(new Fou(cible2 , new Joueur("Rouge", 	0)));
 
+		Case cible3 = plateau.getCase(3, 3);
+		cible1.setPiece(new Fou(cible3 , new Joueur("Rouge", 	0)));
 		//Piece pion = plateau.getCase(9, 10).getPiece(); // pion blanc
 		//List<Case> moves = pion.getDeplacementsPossibles(plateau);
 		//System.out.println("Déplacements possibles de " + pion.getSymboleAvecJoueur() + " en " + pion.getPosition() + " :");
@@ -145,7 +149,7 @@ class Main {
 
 		////////Roi
 
-		Case caseRoi = plateau.getCase(4, 3); // D4
+		/*Case caseRoi = plateau.getCase(4, 3); // D4
 		Roi roi = new Roi(caseRoi, joueur0);
 		caseRoi.setPiece(roi);
 
@@ -156,9 +160,21 @@ class Main {
 		System.out.println("Roi en " + caseRoi + " (" + roi.getSymboleAvecJoueur() + ") peut aller sur :");
 		for (Case c : deplacementsRoi) {
 			System.out.println(" - " + c);
+		}*/
+
+//////////////////PION
+
+		Case casePion = plateau.getCase(8, 4); // I10
+		Pion pion = new Pion(casePion, joueur2);
+		casePion.setPiece(pion);
+
+// Afficher les déplacements
+		List<Case> deplacements = pion.getDeplacementsPossibles(plateau);
+		System.out.println("\n===== TEST DÉPLACEMENTS PION BLANC EN I10 =====");
+		System.out.println("Pion en " + casePion + " (" + pion.getSymboleAvecJoueur() + ") peut aller sur :");
+		for (Case c : deplacements) {
+			System.out.println(" - " + c);
 		}
-
-
 
 	}
 /*
