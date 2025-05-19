@@ -44,7 +44,6 @@ class Main {
 		plateau.initialiserJoueurGaucheYalta(joueur1);
 		plateau.initialiserJoueurHautYalta(joueur2);
 
-		//plateau.afficherPlateauAvecPieces();
 
 		System.out.println("\n===== TEST DES DÉPLACEMENTS DES PIONS =====");
 
@@ -71,7 +70,7 @@ class Main {
 
 		}
 
-		Case caseTest2 = plateau.getCase(9, 4); // I9
+		Case caseTest2 = plateau.getCase(4, 9); // I9
 
 		System.out.println("Case test2 : " + caseTest2);
 
@@ -88,14 +87,14 @@ class Main {
 
 		// On place une pièce ennemie à I9
 
-		Case cible1 = plateau.getCase(4, 8);
-		cible1.setPiece(new Fou(cible1, new Joueur("Rouge", 	0))); // Un fou ennemi
+		//Case cible1 = plateau.getCase(4, 8);
+		//cible1.setPiece(new Fou(cible1, new Joueur("Rouge", 	0))); // Un fou ennemi
 
-		Case cible2 = plateau.getCase(9, 8);
-		cible1.setPiece(new Fou(cible2 , new Joueur("Rouge", 	0)));
+		//Case cible2 = plateau.getCase(9, 8);
+		//cible1.setPiece(new Fou(cible2 , new Joueur("Rouge", 	0)));
 
-		Case cible3 = plateau.getCase(3, 3);
-		cible1.setPiece(new Fou(cible3 , new Joueur("Rouge", 	0)));
+		//Case cible3 = plateau.getCase(10, 8);
+		//cible1.setPiece(new Fou(cible3 , new Joueur("Rouge", 	0)));
 		//Piece pion = plateau.getCase(9, 10).getPiece(); // pion blanc
 		//List<Case> moves = pion.getDeplacementsPossibles(plateau);
 		//System.out.println("Déplacements possibles de " + pion.getSymboleAvecJoueur() + " en " + pion.getPosition() + " :");
@@ -163,7 +162,7 @@ class Main {
 		}*/
 
 //////////////////PION
-
+/*
 		Case casePion = plateau.getCase(8, 4); // I10
 		Pion pion = new Pion(casePion, joueur2);
 		casePion.setPiece(pion);
@@ -174,7 +173,22 @@ class Main {
 		System.out.println("Pion en " + casePion + " (" + pion.getSymboleAvecJoueur() + ") peut aller sur :");
 		for (Case c : deplacements) {
 			System.out.println(" - " + c);
+		}*/
+
+
+		/////////////cavalier
+		Case caseCav = plateau.getCase(4, 8); // Par exemple E5
+		Cavalier cavalier = new Cavalier(caseCav, joueur1); // joueur0 = blanc
+		caseCav.setPiece(cavalier);
+
+		List<Case> depCavalier = cavalier.getDeplacementsPossibles(plateau);
+		System.out.println("\n===== TEST DU CAVALIER =====");
+		System.out.println("Cavalier en " + caseCav + " (" + cavalier.getSymboleAvecJoueur() + ") peut aller sur :");
+		for (Case c : depCavalier) {
+			System.out.println(" - " + c);
 		}
+
+
 
 	}
 /*

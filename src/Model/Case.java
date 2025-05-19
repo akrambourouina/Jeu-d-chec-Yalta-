@@ -43,4 +43,9 @@ public class Case {
 	public String toString() {
 		return "" + (char)('A' + ligne) + (colonne + 1);
 	}
+	public String getNom() {
+		char lettre = (char) ('A' + this.ligne); // A=0, B=1, etc.
+		int chiffre = this.colonne + 1; // 1-indexed
+		return "" + lettre + chiffre;
+	}
 }
