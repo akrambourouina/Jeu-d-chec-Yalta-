@@ -1,4 +1,4 @@
-package Model;
+package com.example.jeu_echec_yalta.model;
 
 import java.util.List;
 import java.util.Objects;
@@ -17,6 +17,16 @@ public class Joueur {
 	public int getCouleur() { return couleur; }
 	public List<Piece> getPieces() { return pieces; }
 	public void setPieces(List<Piece> pieces) { this.pieces = pieces; }
+
+	public Piece getRoi() {
+		for (Piece p : pieces) {
+			if (p.getType() == TypePiece.ROI) {
+				return p;
+			}
+		}
+		return null; // Roi mort ou pas encore placé
+	}
+
 
 	@Override
 	public boolean equals(Object o) {

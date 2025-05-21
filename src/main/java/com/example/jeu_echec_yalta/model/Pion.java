@@ -1,4 +1,5 @@
-package Model;
+package com.example.jeu_echec_yalta.model;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +66,7 @@ public class Pion extends Piece {
 		if (depart.toString().equals("I5")) {
 			Case caseD4 = plateau.getCase(3, 3); // E4
 			if (caseD4 != null && caseD4.estValide() &&caseD4.getPiece() != null && caseD4.getPiece().getJoueur().getCouleur() != this.joueur.getCouleur()) {
-					deplacements.add(caseD4);
+				deplacements.add(caseD4);
 
 			}
 		}
@@ -142,5 +143,9 @@ public class Pion extends Piece {
 	@Override
 	public char getSymbole() {
 		return 'P';
+	}
+
+	public TypePiece getType() {
+		return TypePiece.PION;
 	}
 }

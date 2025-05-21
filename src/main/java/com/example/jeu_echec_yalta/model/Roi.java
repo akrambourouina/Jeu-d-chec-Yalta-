@@ -1,4 +1,4 @@
-package Model;
+package com.example.jeu_echec_yalta.model;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -146,6 +146,11 @@ public class Roi extends Piece {
 	public char getSymbole() {
 		return 'R';
 	}
+	@Override
+	public TypePiece getType() {
+		return TypePiece.ROI;
+	}
+
 	private int getZoneForJoueur(Joueur j) {
 		return switch (j.getCouleur()) {
 			case 0 -> 0;

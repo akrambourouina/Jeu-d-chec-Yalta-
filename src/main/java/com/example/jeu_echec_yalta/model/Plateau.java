@@ -1,4 +1,4 @@
-package Model;
+package com.example.jeu_echec_yalta.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,21 @@ public class Plateau {
 		cases = new Case[12][12];
 		initialiserCases();
 	}
+
+
+	private List<PlateauObserver> observateurs = new ArrayList<>();
+
+	public void ajouterObservateur(PlateauObserver obs) {
+		observateurs.add(obs);
+	}
+
+	public  void notifierObservateurs() {
+		for (PlateauObserver obs : observateurs) {
+			obs.plateauMisAJour();
+		}
+	}
+
+
 
 	private void initialiserCases() {
 		int[][] grilleValide = {
@@ -31,6 +46,7 @@ public class Plateau {
 			for (int j = 0; j < 12; j++) {
 				boolean valide = grilleValide[i][j] == 1;
 				cases[i][j] = new Case(i, j, valide);
+				cases[i][j].setPlateau(this);
 			}
 		}
 	}
@@ -576,9 +592,9 @@ public class Plateau {
 
 		for (int i = 0; i < 8; i++) {
 			// pièces principales en colonne 11
-			//pieces.add(PieceFactory.creer(ordre[i], getCase(lignes[i], 11), joueur));
+			pieces.add(PieceFactory.creer(ordre[i], getCase(lignes[i], 11), joueur));
 			// pions en colonne 10
-			//pieces.add(PieceFactory.creer(TypePiece.PION, getCase(lignes[i], 10), joueur));
+			pieces.add(PieceFactory.creer(TypePiece.PION, getCase(lignes[i], 10), joueur));
 		}
 		//pieces.add(PieceFactory.creer(TypePiece.PION, getCase(8, 8), joueur));
 
@@ -591,8 +607,8 @@ public class Plateau {
 		int[] lignes = {7,6,5,4,3,2,1,0};
 		TypePiece[] ordre = {TypePiece.TOUR, TypePiece.CAVALIER, TypePiece.FOU, TypePiece.REINE, TypePiece.ROI, TypePiece.FOU, TypePiece.CAVALIER, TypePiece.TOUR};
 		for (int i = 0; i < 8; i++) {
-			//pieces.add(PieceFactory.creer(ordre[i], getCase(lignes[i], 0), joueur));
-			//pieces.add(PieceFactory.creer(TypePiece.PION, getCase(lignes[i], 1), joueur));
+			pieces.add(PieceFactory.creer(ordre[i], getCase(lignes[i], 0), joueur));
+			pieces.add(PieceFactory.creer(TypePiece.PION, getCase(lignes[i], 1), joueur));
 		}
 		joueur.setPieces(pieces);
 	}
@@ -605,13 +621,95 @@ public class Plateau {
 		for (int i = 0; i < 8; i++) {
 			//pieces.add(PieceFactory.creer(ordre[i], getCase(ligneBase, colonnes[i]), joueur));
 			//pieces.add(PieceFactory.creer(TypePiece.PION, getCase(lignePions, colonnes[i]), joueur));
-			//pieces.add(PieceFactory.creer(ordre[i], getCase(lignes[i], 7), joueur));
+			pieces.add(PieceFactory.creer(ordre[i], getCase(lignes[i], 7), joueur));
 			// pions en colonne 10
-			//pieces.add(PieceFactory.creer(TypePiece.PION, getCase(lignes[i], 6), joueur));
+			pieces.add(PieceFactory.creer(TypePiece.PION, getCase(lignes[i], 6), joueur));
 		}
 		joueur.setPieces(pieces);
 	}
 
+	public boolean estCaseMenacee(Case caseCible, Joueur defenseur) {
+		for (int i = 0; i < 12; i++) {
+			for (int j = 0; j < 12; j++) {
+				Case c = getCase(i, j);
+				if (c == null || !c.estValide() || c.getPiece() == null) continue;
 
+				Piece p = c.getPiece();
+				if (p.getJoueur() == defenseur) continue;
+
+				List<Case> attaques = p.getDeplacementsPossibles(this);
+				if (attaques.contains(caseCible)) return true;
+			}
+		}
+		return false;
+	}
+
+	public List<Joueur> getTousLesJoueursAvecRoi() {
+		List<Joueur> joueurs = new ArrayList<>();
+
+		// Pour éviter les doublons
+		List<Joueur> dejaVus = new ArrayList<>();
+
+		for (int i = 0; i < 12; i++) {
+			for (int j = 0; j < 12; j++) {
+				Case c = getCase(i, j);
+				if (c == null || !c.estValide() || c.getPiece() == null) continue;
+
+				Piece p = c.getPiece();
+				Joueur jActuel = p.getJoueur();
+				if (p.getType() == TypePiece.ROI && !dejaVus.contains(jActuel)) {
+					joueurs.add(jActuel);
+					dejaVus.add(jActuel);
+				}
+			}
+		}
+
+		return joueurs;
+	}
+	public void eliminerJoueur(Joueur joueur) {
+		for (int i = 0; i < 12; i++) {
+			for (int j = 0; j < 12; j++) {
+				Case c = getCase(i, j);
+				if (c == null || !c.estValide()) continue;
+
+				Piece p = c.getPiece();
+				if (p != null && p.getJoueur() == joueur) {
+					c.setPiece(null);
+				}
+			}
+		}
+	}
+	public int nombreDeJoueursActifs() {
+		return getTousLesJoueursAvecRoi().size();
+	}
+
+	public Joueur getJoueurActifUnique() {
+		List<Joueur> vivants = getTousLesJoueursAvecRoi();
+		if (vivants.size() == 1) return vivants.get(0);
+		return null;
+	}
+
+
+	public void afficherPlateauAvecPieces() {
+		for (int i = 0; i < 12; i++) {
+			System.out.print((char) ('A' + i) + " ");
+			for (int j = 0; j < 12; j++) {
+				Case c = cases[i][j];
+				if (!c.estValide()) {
+					System.out.print("   ");
+				} else if (c.getPiece() != null) {
+					System.out.print(String.format("%-3s", c.getPiece().getSymboleAvecJoueur()));
+				} else {
+					System.out.print("•  ");
+				}
+			}
+			System.out.println();
+		}
+		System.out.print("   ");
+		for (int j = 0; j < 12; j++) {
+			System.out.print((j + 1) + (j + 1 < 10 ? "  " : " "));
+		}
+		System.out.println();
+	}
 
 }

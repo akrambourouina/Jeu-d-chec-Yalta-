@@ -1,4 +1,4 @@
-package Model;
+package com.example.jeu_echec_yalta.model;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -8,6 +8,9 @@ import java.util.Set;
 public class Tour extends Piece {
 	public Tour(Case position, Joueur joueur) {
 		super(position, joueur);
+	}
+	public Tour(Case position, Joueur joueur, boolean affecterCase) {
+		super(position, joueur, affecterCase);
 	}
 
 	@Override
@@ -153,5 +156,8 @@ public class Tour extends Piece {
 	@Override
 	public char getSymbole() {
 		return 'T';
+	}
+	public TypePiece getType() {
+		return TypePiece.TOUR;
 	}
 }

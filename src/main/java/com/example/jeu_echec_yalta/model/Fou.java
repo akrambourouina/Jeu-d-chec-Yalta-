@@ -1,4 +1,4 @@
-package Model;
+package com.example.jeu_echec_yalta.model;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -8,6 +8,9 @@ import java.util.Set;
 public class Fou extends Piece {
 	public Fou(Case position, Joueur joueur) {
 		super(position, joueur);
+	}
+	public Fou(Case position, Joueur joueur, boolean affecterCase) {
+		super(position, joueur, affecterCase);
 	}
 
 	@Override
@@ -204,5 +207,8 @@ public class Fou extends Piece {
 	@Override
 	public char getSymbole() {
 		return 'F';
+	}
+	public TypePiece getType() {
+		return TypePiece.FOU;
 	}
 }

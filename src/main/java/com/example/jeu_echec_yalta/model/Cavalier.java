@@ -1,4 +1,5 @@
-package Model;
+package com.example.jeu_echec_yalta.model;
+
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -103,5 +104,9 @@ public class Cavalier extends Piece {
 	@Override
 	public char getSymbole() {
 		return 'C';
+	}
+
+	public TypePiece getType() {
+		return TypePiece.CAVALIER;
 	}
 }

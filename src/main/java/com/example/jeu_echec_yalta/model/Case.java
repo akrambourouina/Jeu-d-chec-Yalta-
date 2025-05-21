@@ -1,4 +1,4 @@
-package Model;
+package com.example.jeu_echec_yalta.model;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -8,6 +8,7 @@ public class Case {
 	private int colonne;
 	private boolean estValide;
 	private Piece piece;
+	private Plateau plateau;
 
 	private Map<Direction, Case> voisins = new EnumMap<>(Direction.class); // Nouveau !
 
@@ -22,7 +23,16 @@ public class Case {
 	public int getLigne() { return ligne; }
 	public int getColonne() { return colonne; }
 	public Piece getPiece() { return piece; }
-	public void setPiece(Piece piece) { this.piece = piece; }
+	public void setPiece(Piece piece) { this.piece = piece;
+		if (plateau != null) {
+			plateau.notifierObservateurs(); // 🔔 notifie que quelque chose a changé
+		}
+	}
+
+
+	public void setPlateau(Plateau plateau) {
+		this.plateau = plateau;
+	}
 
 	// === VOISINS ===
 	public void setVoisin(Direction dir, Case voisin) {
@@ -42,10 +52,5 @@ public class Case {
 	@Override
 	public String toString() {
 		return "" + (char)('A' + ligne) + (colonne + 1);
-	}
-	public String getNom() {
-		char lettre = (char) ('A' + this.ligne); // A=0, B=1, etc.
-		int chiffre = this.colonne + 1; // 1-indexed
-		return "" + lettre + chiffre;
 	}
 }

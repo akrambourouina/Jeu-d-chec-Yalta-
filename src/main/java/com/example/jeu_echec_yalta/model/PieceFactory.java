@@ -1,4 +1,4 @@
-package Model;
+package com.example.jeu_echec_yalta.model;
 
 public class PieceFactory {
 	public static Piece creer(TypePiece type, Case position, Joueur joueur) {
